@@ -1,0 +1,7 @@
+{
+  "name": "power-log",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
