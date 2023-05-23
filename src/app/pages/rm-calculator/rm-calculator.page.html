@@ -1,13 +1,109 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>rm-calculator</ion-title>
+
+      <ion-title slot="start">RM</ion-title>
+      <ion-radio-group 
+        value="kg" 
+        slot="end" 
+        [(ngModel)]="units">
+        <ion-radio value="kg" >kg</ion-radio>
+        <ion-radio value="lb">lb</ion-radio>
+      </ion-radio-group>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">rm-calculator</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="flex flex-col items-center justify-center py-5">
+    <h3 class="m-0">Your 1RM is..</h3>
+    <h1 class="text-4xl font-bold m-0 ">{{ rm }}{{ units }}</h1>
+  </div>
+
+  <section class="flex justify-center items-start py-5 gap-2.5">
+    <div class="w-2/5 flex flex-col justify-center items-center gap-2.5">
+      <ion-input 
+        fill="outline" 
+        label="weight ({{units}})"
+        labelPlacement="floating"
+        [(ngModel)]="weight"></ion-input>
+    
+      <ion-input
+        fill="outline"  
+        label="reps" 
+        type="number"
+        placeholder="(1-12)"
+        labelPlacement="floating"
+        [(ngModel)]="reps" 
+        (ngModelChange)="isValid()"></ion-input>
+    </div>
+
+    <div class="w-2/5 flex flex-col justify-center items-center gap-2.5">
+      <ion-select
+        interface="action-sheet" 
+        fill="outline"
+        label="rpe" 
+        labelPlacement="floating"
+        placeholder="select rpe" 
+        [(ngModel)]="rpe">
+        <ion-select-option value="10">10</ion-select-option>
+        <ion-select-option value="9.5">9.5</ion-select-option>
+        <ion-select-option value="9">9</ion-select-option>
+        <ion-select-option value="8.5">8.5</ion-select-option>
+        <ion-select-option value="8">8</ion-select-option>
+        <ion-select-option value="7.5">7.5</ion-select-option>
+        <ion-select-option value="7">7</ion-select-option>
+        <ion-select-option value="6.5">6.5</ion-select-option>
+      </ion-select>
+
+      <ion-select
+        interface="action-sheet"
+        fill="outline"
+        label="exercise" 
+        labelPlacement="floating"
+        placeholder="select exercise" 
+        [(ngModel)]="exercise">
+        <ion-select-option 
+          *ngFor="let exercise of exerciseOptions" 
+          value="{{ exercise }}">
+          {{ exercise }}</ion-select-option>
+      </ion-select>
+    </div>
+  </section>
+
+  <section class="flex justify-center items-center gap-2.5">
+    <ion-button 
+      (click)="guessRM()" 
+      fill="outline" 
+      color="tertiary">calculate</ion-button>
+  
+    <ion-button 
+      (click)="saveHistory()" 
+      fill="outline" 
+      color="tertiary">Save</ion-button>
+  </section>
+
+  <section class="flex flex-col justify-center items-center py-5 gap-2.5">
+      <h4>Estimated rep maxes</h4>
+      <div class="w-full flex flex-col">
+        <div 
+          class="w-full h-10 flex justify-around items-center border-b border-white/10" 
+          *ngFor="let item of rmMaxes">
+          <p class="text-left w-14">{{ item.reps }}RM</p>
+          <p class="text-center w-24">{{ (rm * item.percent / 100).toFixed(2) }} {{ units }}</p>
+          <p class="text-right w-14">{{ item.percent }}%</p>
+        </div>
+      </div>
+  </section>
+
+  <section class="flex flex-col justify-center items-center py-5 gap-2.5">
+      <h4 class="w-full text-base text-center">RM percentages</h4>
+      <div class="w-full flex flex-col">
+        <div 
+          class="w-full h-10 flex justify-around items-center border-b border-white/10" 
+          *ngFor="let item of rmPercents">
+          <p>{{ item }}%</p>
+          <p>{{ (rm * item / 100).toFixed(2) }} {{ units }}</p>
+        </div>
+      </div>
+  </section>
 </ion-content>
