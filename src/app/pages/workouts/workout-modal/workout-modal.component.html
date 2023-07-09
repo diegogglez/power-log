@@ -24,7 +24,7 @@
   </section>
   
   <section>
-    <div class="flex flex-col items-center justify-center gap-3 py-5 px-2">
+    <div class="flex flex-col items-center justify-center gap-5 py-5 px-2">
       <ion-input
         placeholder="Workout name"
         formControlName="name"
@@ -44,10 +44,12 @@
 
       <div 
         formArrayName="exercises" 
-        class="flex flex-col items-center gap-2">
+        class="flex flex-col items-center">
+        <h2 *ngIf="exercises.length" class="text-xl">Exercises</h2>
         <div 
           *ngFor="let item of exercises; let i = index"
-          [formGroupName]="i">
+          [formGroupName]="i"
+          class="flex flex-col items-center justify-center gap-2 border-b border-white/10 py-3">
           <ion-input
             placeholder="Exercise name"
             fill="outline"
