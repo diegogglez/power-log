@@ -18,11 +18,6 @@ export class WorkoutsPage {
 
   refreshSuscription!: Subscription;
   workoutsSaved: Workout[] = [];
-  workoutSelected: Workout = {
-    id: '',
-    name: '',
-    exercises: []
-  };
 
   constructor(
     private storage: StorageService,
@@ -35,6 +30,10 @@ export class WorkoutsPage {
     this.refreshSuscription = this.storage.refresh.subscribe(() => {
       this.getWorkouts();
     })
+  }
+
+  launchSeed() {
+    this.storage.workoutSeed();
   }
 
   async getWorkouts() {
@@ -55,9 +54,8 @@ export class WorkoutsPage {
     await modal.present();
   }
 
-  async onClickDelete(item: Workout) {
-    this.workoutSelected = item;
-    console.log('delete', this.workoutSelected.id);
+  async onClickDelete(workout: Workout) {
+    console.log('delete', workout);
 
     const alert = await this.alertController.create({
       header: 'Do you want to delete this item?',
@@ -70,7 +68,7 @@ export class WorkoutsPage {
         {
           text: 'Ok',
           handler: () => {
-            this.deleteWorkout(this.workoutSelected);
+            this.deleteWorkout(workout);
           }
         }
       ],
@@ -79,14 +77,13 @@ export class WorkoutsPage {
     await alert.present();
   }
 
-  deleteWorkout(workout: Workout) {
-    this.storage.deleteWorkout(workout);
-    console.log('delete: ', workout);
+  async deleteWorkout(workout: Workout) {
+    await this.storage.deleteWorkout(workout);
+    console.log('deleted:', workout);
   }
 
   async onClickEdit(item: Workout) {
-    this.workoutSelected = item;
-    console.log('Edit: ', this.workoutSelected);    
+    console.log('Edit: ', item);    
 
     const modal = await this.modalController.create({
       component: WorkoutModalComponent,
