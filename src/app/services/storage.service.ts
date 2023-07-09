@@ -1,3 +1,4 @@
+import { workoutSeed } from './../../utils/workoutSeed';
 import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
 import { Subject } from 'rxjs'
@@ -43,6 +44,12 @@ export class StorageService {
     rmHistory.splice(index, 1);
     await Preferences.set({key: 'RMs', value: JSON.stringify(rmHistory)})
     .then(() => this.refresh$.next());
+  }
+
+  async workoutSeed() {
+    const emptyWorkouts: Workout[] = [];
+    await Preferences.set({key: 'workouts', value: JSON.stringify(emptyWorkouts)});
+    await Preferences.set({key: 'workouts', value: JSON.stringify(workoutSeed)});
   }
 
   async getWorkouts() {
