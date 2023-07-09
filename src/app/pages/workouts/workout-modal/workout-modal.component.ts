@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ReactiveFormsModule, FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { Exercise, Workout } from 'src/app/models/workouts';
 import { StorageService } from 'src/app/services/storage.service';
@@ -11,64 +11,65 @@ import { v4 as uuidv4 } from 'uuid'
   templateUrl: './workout-modal.component.html',
   styleUrls: ['./workout-modal.component.scss'],
   standalone: true,
-  imports: [ IonicModule, FormsModule, CommonModule ]
+  imports: [ 
+    IonicModule, 
+    ReactiveFormsModule, 
+    CommonModule ]
 })
 export class WorkoutModalComponent  implements OnInit {
 
-  @Input() workout!: Workout;
-  public exercise: Exercise = {
-    id: '',
-    name: '',
-  };
+  public editMode: boolean = false;
+  public workoutForm: FormGroup;
+
+  get exercises() {
+    return (<FormArray>this.workoutForm.get('exercises')).controls;
+  }
 
   constructor(
     private storageService: StorageService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private formBuilder: FormBuilder,
+    private changeDetectorRef: ChangeDetectorRef
     ) { }
 
   ngOnInit() {
-    if (!this.workout) {
-      this.workout = {
-        name: '',
-        exercises: []
-      }
-    }
-    console.log(this.workout);
+    this.initForm();
   }
 
-  resetExerciseSettings() {
-    this.exercise.id = ''
-    this.exercise.name = '';
-    this.exercise.sets = null;
-    this.exercise.reps = null;
-    this.exercise.rir = null;
+  onSubmit() {
+    console.log('submit form', this.workoutForm.value);
+
   }
 
-  addExercise() {
-    const newExercise: Exercise = {
-      id: uuidv4(),
-      name: this.exercise.name,
-      sets: this.exercise.sets,
-      reps: this.exercise.reps,
-      rir: this.exercise.rir
-    }
-    this.workout.exercises?.push(newExercise);
-    this.resetExerciseSettings();
+  initForm() {
+    let workoutName = '';
+    let workoutDescription = '';
+    let workoutExercises = new FormArray([]);
+
+    this.workoutForm = new FormGroup({
+      id: new FormControl(uuidv4()),
+      name: new FormControl(workoutName),
+      description: new FormControl(workoutDescription),
+      exercises: workoutExercises
+    })
   }
 
-  removeExercise(exercise: Exercise) {
-    if (this.workout.exercises?.length) {
-      const index = this.workout.exercises.findIndex((item: Exercise) => item.id === exercise.id);
-      console.log(index);
-      this.workout.exercises.splice(index, 1);      
-    }
+  onAddExercise() {
+    (<FormArray>this.workoutForm.get('exercises')).push(
+      new FormGroup({
+        name: new FormControl(null),
+        sets: new FormControl(null),
+        reps: new FormControl(null),
+        rir: new FormControl(null)
+      })
+    )
   }
 
   async saveWorkout() {
-    this.workout.id = uuidv4();
-    const result = this.workout;
-    console.log(result);
-    this.storageService.addWorkout(this.workout);
+    const workout: Workout = this.workoutForm.value;
+    await this.storageService.addWorkout(workout);
+    console.log(workout);
+    
   }
 
   onClose() {
