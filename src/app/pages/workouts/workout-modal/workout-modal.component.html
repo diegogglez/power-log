@@ -83,11 +83,19 @@
                 labelPlacement="floating"
                 formControlName="rir">
               </ion-input>
+              <ion-button 
+                type="button"
+                fill="translucent" 
+                color="danger" 
+                (click)="onDeleteExercise(i)">
+                <ion-icon name="trash" slot="icon-only" color="danger"></ion-icon>
+              </ion-button>
           </div>
           </div>
         </div>
     
         <ion-button
+          type="button"
           class="w-48"
           fill="outline" 
           color="tertiary"

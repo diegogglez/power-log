@@ -91,6 +91,11 @@ export class WorkoutModalComponent  implements OnInit {
     )
   }
 
+  onDeleteExercise(exerciseIndex: number) {
+    console.log('delete exercise:', exerciseIndex);
+    (<FormArray>this.workoutForm.get('exercises')).removeAt(exerciseIndex);
+  }
+
   async saveWorkout() {
     const workout: Workout = this.workoutForm.value;
     await this.storageService.addWorkout(workout);
