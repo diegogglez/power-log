@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, FormArray } from '@angular/forms';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { IonicModule, ModalController, ToastController } from '@ionic/angular';
 import { Workout } from 'src/app/models/workouts';
 import { StorageService } from 'src/app/services/storage.service';
 import { v4 as uuidv4 } from 'uuid'
@@ -30,6 +30,7 @@ export class WorkoutModalComponent  implements OnInit {
   constructor(
     private storageService: StorageService,
     private modalController: ModalController,
+    private toastController: ToastController
     ) { }
 
   ngOnInit() {
@@ -101,9 +102,21 @@ export class WorkoutModalComponent  implements OnInit {
     } else {
       await this.storageService.addWorkout(workout);
     }
+
+    this.modalController.dismiss();
+    this.presentToast();
   }
 
   onClose() {
     this.modalController.dismiss();
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: `workout ${this.editMode ? 'updated' : 'created'} successfully!`,
+      duration: 1000,
+      position: 'bottom'
+    });
+    await toast.present();
   }
 }
