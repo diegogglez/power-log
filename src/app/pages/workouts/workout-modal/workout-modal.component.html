@@ -1,121 +1,105 @@
-<form [formGroup]="workoutForm" (ngSubmit)="onSubmit()">
-  <section>
-    <ion-toolbar>
-      <div class="flex justify-between">
-        <ion-title>
-          create new task
-        </ion-title>
+<ion-content>
+  <form [formGroup]="workoutForm" (ngSubmit)="onSubmit()">
+    <section>
+      <ion-toolbar>
+        <div class="flex justify-between">
+          <ion-title>
+            create new task
+          </ion-title>
+      
+          <ion-button
+            fill="outine"
+            color="tertiary"
+            (click)="onClose()">
+            close
+          </ion-button>
+          <ion-button
+            type="submit"
+            fill="outine"
+            color="tertiary">
+            {{ editMode ? 'save' : 'create' }}
+          </ion-button>
+        </div>
+      </ion-toolbar>
+    </section>
+    
+    <section>
+      <div class="flex flex-col items-center justify-center gap-5 py-5 px-2">
+        <ion-input
+          placeholder="Workout name"
+          formControlName="name"
+          fill="outline"
+          label="Workout"
+          color="tertiary"
+          labelPlacement="floating">
+        </ion-input>
+        <ion-input
+          placeholder="Description"
+          formControlName="description"
+          fill="outline"
+          label="Description"
+          color="tertiary"
+          labelPlacement="floating">
+        </ion-input>
+  
+        <div 
+          formArrayName="exercises" 
+          class="flex flex-col items-center">
+          <h2 *ngIf="exercises.length" class="text-xl">Exercises</h2>
+          <div 
+            *ngFor="let item of exercises; let i = index"
+            [formGroupName]="i"
+            class="flex flex-col items-center justify-center gap-2 border-b border-white/10 py-3">
+            <ion-input
+              placeholder="Exercise name"
+              fill="outline"
+              label="Name"
+              color="tertiary"
+              labelPlacement="floating"
+              formControlName="name">
+            </ion-input>
+            <div class="flex items-center gap-2">
+              <ion-input
+                placeholder="sets"
+                fill="outline"
+                label="Sets"
+                color="tertiary"
+                labelPlacement="floating"
+                formControlName="sets">
+              </ion-input>
+              <ion-input
+                placeholder="reps"
+                fill="outline"
+                label="Reps"
+                color="tertiary"
+                labelPlacement="floating"
+                formControlName="reps">
+              </ion-input>
+              <ion-input
+                placeholder="RIR"
+                fill="outline"
+                label="RIR"
+                color="tertiary"
+                labelPlacement="floating"
+                formControlName="rir">
+              </ion-input>
+          </div>
+          </div>
+        </div>
     
         <ion-button
-          fill="outine"
+          class="w-48"
+          fill="outline" 
           color="tertiary"
-          (click)="onClose()">
-          close
-        </ion-button>
-        <ion-button
-          type="submit"
-          fill="outine"
-          color="tertiary">
-          save
-        </ion-button>
-      </div>
-    </ion-toolbar>
-  </section>
-  
-  <section>
-    <div class="flex flex-col items-center justify-center gap-5 py-5 px-2">
-      <ion-input
-        placeholder="Workout name"
-        formControlName="name"
-        fill="outline"
-        label="Workout"
-        color="tertiary"
-        labelPlacement="floating">
-      </ion-input>
-      <ion-input
-        placeholder="Description"
-        formControlName="description"
-        fill="outline"
-        label="Description"
-        color="tertiary"
-        labelPlacement="floating">
-      </ion-input>
-
-      <div 
-        formArrayName="exercises" 
-        class="flex flex-col items-center">
-        <h2 *ngIf="exercises.length" class="text-xl">Exercises</h2>
-        <div 
-          *ngFor="let item of exercises; let i = index"
-          [formGroupName]="i"
-          class="flex flex-col items-center justify-center gap-2 border-b border-white/10 py-3">
-          <ion-input
-            placeholder="Exercise name"
-            fill="outline"
-            label="Name"
-            color="tertiary"
-            labelPlacement="floating"
-            formControlName="name">
-          </ion-input>
-          <div class="flex items-center gap-2">
-            <ion-input
-              placeholder="sets"
-              fill="outline"
-              label="Sets"
-              color="tertiary"
-              labelPlacement="floating"
-              formControlName="sets">
-            </ion-input>
-            <ion-input
-              placeholder="reps"
-              fill="outline"
-              label="Reps"
-              color="tertiary"
-              labelPlacement="floating"
-              formControlName="reps">
-            </ion-input>
-            <ion-input
-              placeholder="RIR"
-              fill="outline"
-              label="RIR"
-              color="tertiary"
-              labelPlacement="floating"
-              formControlName="rir">
-            </ion-input>
-        </div>
-        </div>
-      </div>
-  
-      <ion-button
-        class="w-48"
-        fill="outline" 
-        color="tertiary"
-        (click)="onAddExercise()">
-        add exercise
-        <ion-icon 
-          name="add-outline" 
-          color="tertiary" 
-          slot="icon-only">
-        </ion-icon>
-      </ion-button>
-  
-      <!-- <div
-        *ngFor="let item of workout.exercises"
-        class="flex justify-between items-center gap-y-2 px-2.5 w-full">
-        <p>
-          {{ item.name }} {{ item.sets }} {{ item.reps }} (RIR {{ item.rir }})
-        </p>
-        <ion-button 
-          color="translucent" 
-          fill="clear"
-          (click)="removeExercise(item)">
+          (click)="onAddExercise()">
+          add exercise
           <ion-icon 
-            name="trash" 
-            slot="icon-only" 
-            color="danger">
+            name="add-outline" 
+            color="tertiary" 
+            slot="icon-only">
           </ion-icon>
         </ion-button>
-      </div> -->
-    </div>
-  </section>
-</form>
+      </div>
+    </section>
+  </form>
+</ion-content>
