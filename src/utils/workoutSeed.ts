@@ -5,7 +5,7 @@ export const workoutSeed: Workout[] = [
   {
     id: uuidv4(),
     name: 'Torso 1',
-    description: '',
+    description: 'Upper body day 1',
     exercises: [
       {
         id: uuidv4(),
@@ -40,7 +40,7 @@ export const workoutSeed: Workout[] = [
   {
     id: uuidv4(),
     name: 'Pierna 1',
-    description: '',
+    description: 'lower body day 1',
     exercises: [
       {
         id: uuidv4(),
@@ -75,7 +75,7 @@ export const workoutSeed: Workout[] = [
   {
     id: uuidv4(),
     name: 'Torso 2',
-    description: '',
+    description: 'Upper body day 2',
     exercises: [
       {
         id: uuidv4(),
@@ -110,7 +110,7 @@ export const workoutSeed: Workout[] = [
   {
     id: uuidv4(),
     name: 'pierna 2',
-    description: '',
+    description: 'lower body day 1',
     exercises: [
       {
         id: uuidv4(),
