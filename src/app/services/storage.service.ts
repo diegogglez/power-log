@@ -80,4 +80,12 @@ export class StorageService {
     await Preferences.set({key: 'workouts', value: JSON.stringify(workoutsSaved)})
     .then(() => this.refresh$.next());
   }
+
+  async updateWorkout(workout: Workout) {
+    const workoutsSaved = await this.getWorkouts();
+    const index = workoutsSaved.findIndex((item: Workout) => item.id === workout.id)
+    workoutsSaved[index] = workout;
+    await Preferences.set({key: 'workouts', value: JSON.stringify(workoutsSaved)})
+      .then(() => this.refresh$.next());
+  }
 }
