@@ -18,8 +18,9 @@ import { v4 as uuidv4 } from 'uuid'
 })
 export class WorkoutModalComponent  implements OnInit {
 
+  @Input() workout!: Workout;
   public editMode: boolean = false;
-  public workoutForm: FormGroup;
+  public workoutForm!: FormGroup;
 
   get exercises() {
     return (<FormArray>this.workoutForm.get('exercises')).controls;
@@ -33,24 +34,49 @@ export class WorkoutModalComponent  implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.workout ? this.editMode = true : this.editMode = false;
     this.initForm();
+    console.log('open edit', this.workout);
+    console.log(this.editMode); 
   }
 
   onSubmit() {
     console.log('submit form', this.workoutForm.value);
-
+    this.saveWorkout()
   }
 
   initForm() {
+    console.log('init form');
+    let workoutId = uuidv4();
     let workoutName = '';
     let workoutDescription = '';
-    let workoutExercises = new FormArray([]);
+    let workoutExercises: any = new FormArray([]);
+
+    if (this.editMode) {
+      const workout = this.workout
+      workoutId = this.workout.id;
+      workoutName = this.workout.name;
+      workoutDescription = this.workout.description;
+
+      if (workout.exercises) {
+        for (let item of workout.exercises) {
+          workoutExercises.push(
+            new FormGroup({
+              'id': new FormControl(item.id),
+              'name': new FormControl(item.name),
+              'reps': new FormControl(item.reps),
+              'sets': new FormControl(item.sets),
+              'rir': new FormControl(item.rir),
+            }));
+        }
+      }
+    }
 
     this.workoutForm = new FormGroup({
-      id: new FormControl(uuidv4()),
-      name: new FormControl(workoutName),
-      description: new FormControl(workoutDescription),
-      exercises: workoutExercises
+      'id': new FormControl(workoutId),
+      'name': new FormControl(workoutName),
+      'description': new FormControl(workoutDescription),
+      'exercises': workoutExercises
     })
   }
 
