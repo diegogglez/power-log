@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { rpeChart } from './constants/rpe-chart';
 import { RMItem } from 'src/app/models/rms';
 import { v4 as uuidv4 } from 'uuid'
-import { StorageService } from 'src/app/services/storage.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-rm-calculator',

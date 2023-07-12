@@ -1,9 +1,9 @@
-import { workoutSeed } from './../../utils/workoutSeed';
+import { workoutSeed } from '../../../utils/workoutSeed';
 import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
 import { Subject } from 'rxjs'
-import { RMItem } from '../models/rms';
-import { Workout } from '../models/workouts';
+import { RMItem } from '../../models/rms';
+import { Workout } from '../../models/workouts';
 
 @Injectable({
   providedIn: 'root'

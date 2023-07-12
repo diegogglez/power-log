@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { IonicModule, ModalController, ToastController } from '@ionic/angular';
 import { Workout } from 'src/app/models/workouts';
-import { StorageService } from 'src/app/services/storage.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 import { v4 as uuidv4 } from 'uuid'
 
 @Component({
