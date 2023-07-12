@@ -53,10 +53,11 @@
       <div class="w-full flex flex-col justify-center items-start gap-1.5">
         <p *ngFor="let exercise of item.exercises">{{ exercise.name }} {{ exercise.sets }}x{{ exercise.reps }} (RIR: {{ exercise.rir }})</p>
       </div>
-      <div class="workout-item-footer">
+      <div>
         <ion-button 
           fill="outline" 
-          color="success">
+          color="success"
+          (click)="onStartWorkout()">
           <ion-icon 
             name="play-outline" 
             color="success" 

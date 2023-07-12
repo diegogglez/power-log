@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AlertController, IonicModule, ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { StorageService } from 'src/app/services/storage.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 import { Workout } from 'src/app/models/workouts';
 import { WorkoutModalComponent } from './workout-modal/workout-modal.component';
+import { WorkoutService } from 'src/app/services/workout/workout.service';
 
 @Component({
   selector: 'app-workouts',
@@ -21,6 +22,7 @@ export class WorkoutsPage {
 
   constructor(
     private storage: StorageService,
+    private workoutService: WorkoutService,
     private alertController: AlertController,
     private modalController: ModalController
     ) {}
@@ -96,4 +98,7 @@ export class WorkoutsPage {
     await modal.present();
   }
 
+  onStartWorkout() {
+    this.workoutService.isWorkingout.next(true);
+  }
 }
