@@ -20,6 +20,7 @@ export class WorkoutsPage {
   public isWorkingoutSuscription!: Subscription;
   public refreshSuscription!: Subscription;
   public workoutsSaved: Workout[] = [];
+  public startWorkingOutDisabled: boolean = false
 
   constructor(
     private storage: StorageService,
@@ -35,8 +36,8 @@ export class WorkoutsPage {
       this.getWorkouts();
     })
 
-    this.isWorkingoutSuscription = this.workoutService.isWorkingout.subscribe(() => {
-      this.workoutService.openSessionModal()
+    this.isWorkingoutSuscription = this.workoutService.isWorkingOut$.subscribe((isWorkingOut) => {
+      this.startWorkingOutDisabled = isWorkingOut;
     })
   }
 
@@ -102,7 +103,9 @@ export class WorkoutsPage {
     await modal.present();
   }
 
-  onStartWorkout() {
-    this.workoutService.isWorkingout.next(true);
+  onStartWorkout(workout: Workout) {
+    this.workoutService.isWorkingOut$.next(true);
+    this.workoutService.openSessionModal()
+    this.workoutService.currentWorkout = workout;
   }
 }

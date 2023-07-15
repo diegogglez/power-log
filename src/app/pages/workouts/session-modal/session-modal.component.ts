@@ -1,6 +1,9 @@
+import { WorkoutService } from 'src/app/services/workout/workout.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
+import { Workout } from 'src/app/models/workouts';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-session-modal',
@@ -14,8 +17,20 @@ import { IonicModule } from '@ionic/angular';
 })
 export class SessionModalComponent  implements OnInit {
 
-  constructor() { }
+  public workout!: Workout;
 
-  ngOnInit() {}
+  constructor(
+    private modalController: ModalController,
+    private workoutService: WorkoutService
+    ) { }
 
+  ngOnInit() {
+    // console.log('init workout', this.workoutService.currentWorkout);
+    this.workout = this.workoutService.currentWorkout;
+  }
+
+  onClose() {
+    this.modalController.dismiss();
+    this.workoutService.isWorkingOut$.next(false);
+  }
 }

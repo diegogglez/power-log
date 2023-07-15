@@ -1,3 +1,16 @@
-<p>
-  workout-session-modal works!
-</p>
+<ion-content>
+  <ion-toolbar>
+    <div class="flex justify-between">
+      <ion-title>
+        {{ workout.name }}
+      </ion-title>
+  
+      <ion-button
+        fill="outine"
+        color="tertiary"
+        (click)="onClose()">
+        close
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-content>

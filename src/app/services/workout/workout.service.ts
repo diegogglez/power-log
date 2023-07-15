@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Subject } from 'rxjs';
+import { Workout } from 'src/app/models/workouts';
 import { SessionModalComponent } from 'src/app/pages/workouts/session-modal/session-modal.component';
 
 @Injectable({
@@ -8,13 +9,10 @@ import { SessionModalComponent } from 'src/app/pages/workouts/session-modal/sess
 })
 export class WorkoutService {
 
-  isWorkingOut$ = new Subject<boolean>();
+  public isWorkingOut$ = new Subject<boolean>();
+  public currentWorkout!: Workout;
 
   constructor(private modalController: ModalController) { }
-
-  get isWorkingout() {
-    return this.isWorkingOut$;
-  }
 
   async openSessionModal() {
     const modal = await this.modalController.create({

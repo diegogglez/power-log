@@ -57,7 +57,8 @@
         <ion-button 
           fill="outline" 
           color="success"
-          (click)="onStartWorkout()">
+          [disabled]="startWorkingOutDisabled"
+          (click)="onStartWorkout(item)">
           <ion-icon 
             name="play-outline" 
             color="success" 
