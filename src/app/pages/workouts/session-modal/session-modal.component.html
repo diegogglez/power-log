@@ -1,11 +1,14 @@
 <ion-content>
   <ion-toolbar>
-    <div class="flex justify-between">
-      <ion-title>
+    <div class="flex justify-between items-center px-2">
+      <h2 class="p-0 text-center w-20">
         {{ workout.name }}
-      </ion-title>
-  
+      </h2>
+
+      <app-timer></app-timer>
+      
       <ion-button
+        class="m-0"
         fill="outine"
         color="tertiary"
         (click)="onClose()">

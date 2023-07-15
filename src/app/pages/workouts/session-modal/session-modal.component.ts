@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { Workout } from 'src/app/models/workouts';
 import { Subscription } from 'rxjs';
+import { TimerComponent } from './timer/timer.component';
 
 @Component({
   selector: 'app-session-modal',
@@ -12,11 +13,12 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [
     IonicModule,
-    CommonModule
+    CommonModule,
+    TimerComponent
   ],
 })
 export class SessionModalComponent  implements OnInit {
-
+  
   public workout!: Workout;
 
   constructor(
