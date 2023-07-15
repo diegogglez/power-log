@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AlertController, IonicModule, ModalController } from '@ionic/angular';
@@ -17,8 +17,9 @@ import { WorkoutService } from 'src/app/services/workout/workout.service';
 })
 export class WorkoutsPage {
 
-  refreshSuscription!: Subscription;
-  workoutsSaved: Workout[] = [];
+  public isWorkingoutSuscription!: Subscription;
+  public refreshSuscription!: Subscription;
+  public workoutsSaved: Workout[] = [];
 
   constructor(
     private storage: StorageService,
@@ -29,8 +30,13 @@ export class WorkoutsPage {
 
   ionViewWillEnter() {
     this.getWorkouts();
+
     this.refreshSuscription = this.storage.refresh.subscribe(() => {
       this.getWorkouts();
+    })
+
+    this.isWorkingoutSuscription = this.workoutService.isWorkingout.subscribe(() => {
+      this.workoutService.openSessionModal()
     })
   }
 
@@ -52,7 +58,6 @@ export class WorkoutsPage {
       breakpoints: [0, 0.5, 0.7, 1],
       initialBreakpoint: 0.7,
     });
-
     await modal.present();
   }
 
@@ -75,7 +80,6 @@ export class WorkoutsPage {
         }
       ],
     });
-
     await alert.present();
   }
 
