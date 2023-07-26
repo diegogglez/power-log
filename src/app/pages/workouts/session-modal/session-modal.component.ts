@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { Workout } from 'src/app/models/workouts';
-import { Subscription } from 'rxjs';
 import { TimerComponent } from './timer/timer.component';
 
 @Component({
@@ -29,6 +28,13 @@ export class SessionModalComponent  implements OnInit {
   ngOnInit() {
     // console.log('init workout', this.workoutService.currentWorkout);
     this.workout = this.workoutService.currentWorkout;
+    console.log(this.workout);   
+    console.log(this.createSetsRange(5));
+     
+  }
+
+  createSetsRange(sets: number | undefined) {
+    return new Array(sets).fill(0).map((n, index) => index + 1);
   }
 
   onClose() {

@@ -1,0 +1,13 @@
+ion-input {
+  width: 50px;
+  height: 30px;
+  margin: 0;
+}
+
+.sc-ion-input-md-h:not(.legacy-input) {
+  min-height: 30px;
+}
+
+label {
+  color: red;
+}

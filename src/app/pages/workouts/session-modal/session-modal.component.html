@@ -1,19 +1,57 @@
 <ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <div class="flex justify-between items-center px-2">
+        <h2 class="p-0 text-center w-20">
+          {{ workout.name }}
+        </h2>
+  
+        <app-timer></app-timer>
+        
+        <ion-button
+          class="m-0"
+          fill="outine"
+          color="tertiary"
+          (click)="onClose()">
+          save
+        </ion-button>
+      </div>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card *ngFor="let item of workout.exercises">
+    <ion-card-header>
+      <ion-card-subtitle>{{ item.sets }} x {{ item.reps }} RIR {{ item.rir }}</ion-card-subtitle>
+      <ion-card-title class="m-0">{{ item.name }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="flex flex-col justify-center items-center gap-2">
+        <div
+          class=" w-full flex justify-around items-center gap-2" 
+          *ngFor="let set of createSetsRange(item.sets)">
+          <p>Set {{ set }}</p> 
+          <ion-input
+            fill="outline"
+            color="tertiary"
+            type="number">
+          </ion-input>
+          <ion-input
+            fill="outline"
+            color="tertiary"
+            type="number">
+          </ion-input>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+<ion-footer>
   <ion-toolbar>
-    <div class="flex justify-between items-center px-2">
-      <h2 class="p-0 text-center w-20">
-        {{ workout.name }}
-      </h2>
-
-      <app-timer></app-timer>
-      
+    <div class="flex justify-center items-center">
       <ion-button
-        class="m-0"
-        fill="outine"
-        color="tertiary"
+        color="danger"
         (click)="onClose()">
-        close
+        Cancel
       </ion-button>
     </div>
   </ion-toolbar>
-</ion-content>
+</ion-footer>
