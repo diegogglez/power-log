@@ -105,7 +105,6 @@ export class WorkoutsPage {
 
   onStartWorkout(workout: Workout) {
     this.workoutService.isWorkingOut$.next(true);
-    this.workoutService.openSessionModal()
-    this.workoutService.currentWorkout = workout;
+    this.workoutService.openSessionModal(workout);
   }
 }

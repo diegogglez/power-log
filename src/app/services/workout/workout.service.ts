@@ -10,13 +10,15 @@ import { SessionModalComponent } from 'src/app/pages/workouts/session-modal/sess
 export class WorkoutService {
 
   public isWorkingOut$ = new Subject<boolean>();
-  public currentWorkout!: Workout;
 
   constructor(private modalController: ModalController) { }
 
-  async openSessionModal() {
+  async openSessionModal(workout: Workout) {
     const modal = await this.modalController.create({
       component: SessionModalComponent,
+      componentProps: {
+        workout,
+      },
       breakpoints: [0.1, 0.5, 0.9, 1],
       backdropBreakpoint: 1,
       initialBreakpoint: 1,
