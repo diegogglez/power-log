@@ -1,57 +1,85 @@
 <ion-content>
-  <ion-header>
-    <ion-toolbar>
-      <div class="flex justify-between items-center px-2">
-        <h2 class="p-0 text-center w-20">
-          {{ workout.name }}
-        </h2>
-  
-        <app-timer></app-timer>
-        
-        <ion-button
-          class="m-0"
-          fill="outine"
-          color="tertiary"
-          (click)="onClose()">
-          save
-        </ion-button>
-      </div>
-    </ion-toolbar>
-  </ion-header>
-  <ion-card *ngFor="let item of workout.exercises">
-    <ion-card-header>
-      <ion-card-subtitle>{{ item.sets }} x {{ item.reps }} RIR {{ item.rir }}</ion-card-subtitle>
-      <ion-card-title class="m-0">{{ item.name }}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <div class="flex flex-col justify-center items-center gap-2">
-        <div
-          class=" w-full flex justify-around items-center gap-2" 
-          *ngFor="let set of createSetsRange(item.sets)">
-          <p>Set {{ set }}</p> 
-          <ion-input
-            fill="outline"
-            color="tertiary"
-            type="number">
-          </ion-input>
-          <ion-input
-            fill="outline"
-            color="tertiary"
-            type="number">
-          </ion-input>
+  <form [formGroup]="sessionForm" (ngSubmit)="onSubmit()">
+    <ion-header>
+      <ion-toolbar>
+        <div class="flex justify-between items-center px-2">
+          <h2 class="p-0 text-center w-20">
+            {{ workout.name }}
+          </h2>
+    
+          <app-timer></app-timer>
+          
+          <ion-button
+            type="submit"
+            class="m-0"
+            fill="outine"
+            color="tertiary">
+            save
+          </ion-button>
         </div>
-      </div>
-    </ion-card-content>
-  </ion-card>
-</ion-content>
-<ion-footer>
-  <ion-toolbar>
-    <div class="flex justify-center items-center">
-      <ion-button
-        color="danger"
-        (click)="onClose()">
-        Cancel
-      </ion-button>
+      </ion-toolbar>
+    </ion-header>
+    <div formArrayName="exercises">
+      <ion-card *ngFor="let item of workout.exercises, let i = index" [formGroupName]="i">
+        <ion-card-header>
+          <ion-card-subtitle>{{ item.sets }} x {{ item.reps }} RIR {{ item.rir }}</ion-card-subtitle>
+          <ion-card-title class="m-0">{{ item.name }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="flex flex-col justify-center items-center gap-2" formArrayName="sets">
+            <div class="w-full flex justify-around items-center gap-2">
+              <p>set</p>
+              <p>weight</p>
+              <p></p>
+              <p>reps</p>
+              <p>RIR</p>
+              <p></p>
+            </div>
+            <div
+              class="w-full flex justify-around items-center gap-2" 
+              *ngFor="let set of createSetsRange(item.sets), let i = index"
+              [formGroupName]="i">
+              <p>{{ set }}</p> 
+  
+              <ion-input
+                formControlName="weight"
+                fill="outline"
+                color="tertiary"
+                type="number">
+              </ion-input>
+              <p>x</p>
+              <ion-input
+                formControlName="reps"
+                fill="outline"
+                color="tertiary"
+                type="number">
+              </ion-input>
+              <ion-input
+                formControlName="rir"
+                fill="outline"
+                color="tertiary"
+                type="number">
+              </ion-input>
+              <div class="checkbox">
+                <ion-checkbox></ion-checkbox>
+              </div>
+
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
     </div>
-  </ion-toolbar>
-</ion-footer>
+  
+    <ion-footer>
+      <ion-toolbar>
+        <div class="flex justify-center items-center">
+          <ion-button
+            color="danger"
+            (click)="onClose()">
+            Cancel
+          </ion-button>
+        </div>
+      </ion-toolbar>
+    </ion-footer>
+  </form>
+</ion-content>
