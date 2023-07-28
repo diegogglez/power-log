@@ -1,27 +1,25 @@
 <ion-content>
   <form [formGroup]="workoutForm" (ngSubmit)="onSubmit()">
-    <section>
-      <ion-toolbar>
-        <div class="flex justify-between">
-          <ion-title>
-            create new task
-          </ion-title>
-      
-          <ion-button
-            fill="outine"
-            color="tertiary"
-            (click)="onClose()">
-            close
-          </ion-button>
-          <ion-button
-            type="submit"
-            fill="outine"
-            color="tertiary">
-            {{ editMode ? 'save' : 'create' }}
-          </ion-button>
-        </div>
-      </ion-toolbar>
-    </section>
+    <ion-toolbar>
+      <div class="flex justify-between">
+        <ion-title>
+          create new task
+        </ion-title>
+    
+        <ion-button
+          fill="outine"
+          color="tertiary"
+          (click)="onClose()">
+          close
+        </ion-button>
+        <ion-button
+          type="submit"
+          fill="outine"
+          color="tertiary">
+          {{ editMode ? 'save' : 'create' }}
+        </ion-button>
+      </div>
+    </ion-toolbar>
     
     <section>
       <div class="flex flex-col items-center justify-center gap-5 py-5 px-2">

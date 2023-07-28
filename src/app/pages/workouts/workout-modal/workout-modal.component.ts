@@ -4,7 +4,7 @@ import { ReactiveFormsModule, FormGroup, FormControl, FormArray } from '@angular
 import { IonicModule, ModalController, ToastController } from '@ionic/angular';
 import { Workout } from 'src/app/models/workouts';
 import { StorageService } from 'src/app/services/storage/storage.service';
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-workout-modal',

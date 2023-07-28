@@ -8,10 +8,10 @@ export interface Workout {
 export interface Exercise {
   id: string;
   name: string;
-  sets?: number | null;
-  reps?: number | null;
-  weight?: number | null;
+  sets?: number;
+  reps?: number;
+  weight?: number;
   units?: string;
-  rir?: number | null;
-  rpe?: number | null;
+  rir?: number;
+  rpe?: number;
 }
