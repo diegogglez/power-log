@@ -71,7 +71,7 @@ export class SessionModalComponent  implements OnInit {
   }
 
   onClose() {
-    this.modalController.dismiss();
+    this.modalController.dismiss(true);
     this.workoutService.isWorkingOut$.next(false);
   }
 }

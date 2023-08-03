@@ -23,6 +23,9 @@ export class WorkoutService {
       backdropBreakpoint: 1,
       initialBreakpoint: 1,
       cssClass: 'sessionModal',
+      canDismiss: async (data: boolean) => {
+        return data;
+      }
     });
     await modal.present();
   }

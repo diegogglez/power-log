@@ -20,7 +20,7 @@
       </ion-toolbar>
     </ion-header>
     <div formArrayName="exercises">
-      <ion-card *ngFor="let item of workout.exercises, let i = index" [formGroupName]="i">
+      <ion-card *ngFor="let item of workout.exercises; let i = index" [formGroupName]="i">
         <ion-card-header>
           <ion-card-subtitle>{{ item.sets }} x {{ item.reps }} RIR {{ item.rir }}</ion-card-subtitle>
           <ion-card-title class="m-0">{{ item.name }}</ion-card-title>
@@ -36,7 +36,7 @@
               <p></p>
             </div>
             <div
-              class="set w-full flex justify-around items-center gap-2 py-2" 
+              class="set w-full flex justify-around items-center gap-2 py-2"
               *ngFor="let set of createSetsRange(item.sets), let i = index"
               [formGroupName]="i">
               <p>{{ set }}</p> 
@@ -64,6 +64,7 @@
                 <ion-checkbox 
                   formControlName="done">
                 </ion-checkbox>
+                <!-- [disabled]="sessionForm.get('exercises').controls ? true : false" -->
               </div>
 
             </div>
