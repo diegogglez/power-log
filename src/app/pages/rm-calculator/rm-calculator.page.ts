@@ -39,6 +39,10 @@ export class RmCalculatorPage implements OnInit {
 
   ngOnInit() { }
 
+  rmsSeed() {
+    this.storageService.rmsSeed();
+  }
+
   isValid() {
     this.reps > 0 && this.reps <= 12 
       ? this.repsValid = true 
@@ -52,10 +56,6 @@ export class RmCalculatorPage implements OnInit {
     return numericDate;
   }
 
-  guessRepMaxes() {
-     
-  }
-
   guessRM() {
     const result = (this.weight / rpeChart[this.rpe][this.reps - 1].percent) * 100;
     this.rm = result.toFixed(2);
@@ -64,7 +64,6 @@ export class RmCalculatorPage implements OnInit {
     
     console.log(this.rm);
     console.log(rpeChart[this.rpe][this.reps - 1].percent);
-    this.guessRepMaxes();
   }
 
   async saveHistory() {
