@@ -1,3 +1,9 @@
+export interface Session {
+  id: string;
+  date: string;
+  exercises: Exercise[];
+}
+
 export interface Workout {
   id: string;
   name: string;
