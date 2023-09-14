@@ -2,19 +2,20 @@
   <ion-toolbar>
     <ion-title>History</ion-title>
     <ion-radio-group 
-        value="RMs" 
+        (ionChange)="setHistoryMode($event)"
+        value="{{historyMode}}" 
         slot="end">
-        <ion-radio value="RMs">RMs</ion-radio>
-        <ion-radio value="Workouts">Workouts</ion-radio>
+        <ion-radio value="rms">RMs</ion-radio>
+        <ion-radio value="workouts">Workouts</ion-radio>
       </ion-radio-group>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 
-  <p *ngIf="!rmHistory.length">No RMs saved yet</p>
-  <ion-list *ngIf="rmHistory.length">
-    <ion-item-sliding *ngFor="let item of rmHistory" (ionSwipe)="presentAlert(item)">
+  <p *ngIf="!history.length && historyMode === 'rms'">No RMs saved yet</p>
+  <ion-list *ngIf="history.length && historyMode === 'rms'">
+    <ion-item-sliding *ngFor="let item of history" (ionSwipe)="presentAlert(item)">
       <ion-item-options side="start">
         <ion-item-option 
           color="translucent" 

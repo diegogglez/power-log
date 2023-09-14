@@ -15,8 +15,9 @@ import { StorageService } from 'src/app/services/storage/storage.service';
 })
 export class HistoryPage {
 
+  historyMode: string = 'rms'
   refreshSuscription!: Subscription;
-  rmHistory: RMItem[] = [];
+  history: any[] = [];
 
   exerciseOptions: string[] = [
     'Squats',
@@ -34,21 +35,36 @@ export class HistoryPage {
     ) { }
   
   ionViewWillEnter() {
-    this.getRMs();
+    this.historyMode === 'rms' ? this.getRMs() : this.getSessions();
+
     this.refreshSuscription = this.storage.refresh.subscribe(() => {
-      this.getRMs();
+      this.historyMode === 'rms' ? this.getRMs() : this.getSessions();
     })
   }
 
+  setHistoryMode(event: any) {
+    const mode = event.detail.value;
+    this.historyMode = mode;
+    this.loadHistory();
+  }
+
+  loadHistory() {
+    this.historyMode === 'rms' ? this.getRMs() : this.getSessions();
+  }
+
+  async getSessions() {
+    console.log('sessions');
+  }
+
   async getRMs() {
-    this.rmHistory = await this.storage.getRMs();
-    console.log(this.rmHistory);
+    this.history = await this.storage.getRMs();
+    console.log(this.history);
   }
 
   async filterExercises(exercise: string) {
     await this.getRMs();
-    const rmHistoryFiltered = this.rmHistory.filter(rm => rm.exercise === exercise);
-    this.rmHistory = rmHistoryFiltered;
+    const rmHistoryFiltered = this.history.filter(rm => rm.exercise === exercise);
+    this.history = rmHistoryFiltered;
     console.log('filter', exercise);
   }
 
