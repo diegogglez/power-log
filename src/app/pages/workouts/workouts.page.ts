@@ -20,7 +20,7 @@ export class WorkoutsPage {
   public isWorkingoutSuscription!: Subscription;
   public refreshSuscription!: Subscription;
   public workoutsSaved: Workout[] = [];
-  public startWorkingOutDisabled: boolean = false
+  public startDisabled: boolean = false
 
   constructor(
     private storage: StorageService,
@@ -37,7 +37,7 @@ export class WorkoutsPage {
     })
 
     this.isWorkingoutSuscription = this.workoutService.isWorkingOut$.subscribe((isWorkingOut) => {
-      this.startWorkingOutDisabled = isWorkingOut;
+      this.startDisabled = isWorkingOut;
     })
   }
 
