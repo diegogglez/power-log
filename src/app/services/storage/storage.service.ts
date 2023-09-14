@@ -1,9 +1,11 @@
+import { rmsSeed } from './../../../utils/rmsSeed';
 import { workoutSeed } from '../../../utils/workoutSeed';
 import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
 import { Subject } from 'rxjs'
 import { RMItem } from '../../models/rms';
 import { Workout } from '../../models/workouts';
+import { Session } from 'inspector';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,14 @@ export class StorageService {
 
   get refresh() {
     return this.refresh$;
+  }
+
+  //* RMs
+
+  async rmsSeed() {
+    const emptyRms: RMItem[] = [];
+    await Preferences.set({key: 'RMs', value: JSON.stringify(emptyRms)});
+    await Preferences.set({key: 'RMs', value: JSON.stringify(rmsSeed)});
   }
 
   async getRMs() {
@@ -46,6 +56,8 @@ export class StorageService {
     .then(() => this.refresh$.next());
   }
 
+  //* WORKOUTS
+
   async workoutSeed() {
     const emptyWorkouts: Workout[] = [];
     await Preferences.set({key: 'workouts', value: JSON.stringify(emptyWorkouts)});
@@ -57,7 +69,7 @@ export class StorageService {
     
     if(!workoutsSaved.value) {
       const defaultWorkoutsCollection: Workout[] = [];
-      await Preferences.set({key: 'workouts', value: JSON.stringify(defaultWorkoutsCollection)})
+      await Preferences.set({key: 'workouts', value: JSON.stringify(defaultWorkoutsCollection)});
     }
     
     return JSON.parse(workoutsSaved.value || '[]');
@@ -87,5 +99,17 @@ export class StorageService {
     workoutsSaved[index] = workout;
     await Preferences.set({key: 'workouts', value: JSON.stringify(workoutsSaved)})
       .then(() => this.refresh$.next());
+  }
+
+  //* SESSIONS
+
+  async getSessions() {
+    const sessionsSaved = await Preferences.get({key: 'sessions'});
+    if (!sessionsSaved.value) {
+      const defaultSessionsCollection: Session[] = [];
+      await Preferences.set({key: 'sessions', value: JSON.stringify(defaultSessionsCollection)});
+    }
+
+    return JSON.parse(sessionsSaved.value || '[]');
   }
 }
