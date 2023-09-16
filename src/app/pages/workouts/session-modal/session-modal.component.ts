@@ -47,7 +47,7 @@ export class SessionModalComponent  implements OnInit {
 
   onSubmit() {  
     this.onClose();
-    this.saveSession(); 
+    this.saveSession();
   }
 
   initForm() {
@@ -55,6 +55,7 @@ export class SessionModalComponent  implements OnInit {
 
     for (let item of this.workout.exercises!) {
       const exercise = new FormGroup({
+        name: new FormControl(item.name),
         sets: new FormArray([])
       });
       
@@ -90,6 +91,7 @@ export class SessionModalComponent  implements OnInit {
   saveSession() {
     this.session.id = uuidv4();
     this.session.date = this.generateDate();
+    this.session.exercises = this.sessionForm.value.exercises;
     console.log(this.session);    
   }
 
