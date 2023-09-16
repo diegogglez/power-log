@@ -44,7 +44,6 @@ export class WorkoutModalComponent  implements OnInit {
   }
 
   initForm() {
-    console.log('init form');
     let workoutId = uuidv4();
     let workoutName = '';
     let workoutDescription = '';

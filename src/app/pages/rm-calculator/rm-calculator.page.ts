@@ -47,7 +47,6 @@ export class RmCalculatorPage implements OnInit {
     this.reps > 0 && this.reps <= 12 
       ? this.repsValid = true 
       : this.repsValid = false;
-    console.log(this.repsValid);
   }
 
   generateDate() {
@@ -59,17 +58,9 @@ export class RmCalculatorPage implements OnInit {
   guessRM() {
     const result = (this.weight / rpeChart[this.rpe][this.reps - 1].percent) * 100;
     this.rm = result.toFixed(2);
-
-    console.log(typeof result);
-    
-    console.log(this.rm);
-    console.log(rpeChart[this.rpe][this.reps - 1].percent);
   }
 
-  async saveHistory() {
-    const rmHistory = await this.storageService.getRMs();
-    console.log(rmHistory);
-    
+  async saveHistory() {    
     const date = this.generateDate();
     
     const rm: RMItem = {
@@ -82,7 +73,7 @@ export class RmCalculatorPage implements OnInit {
       exercise: this.exercise,
       date: date
     }
+    
     this.storageService.addRM(rm);
   }
-
 }
