@@ -58,7 +58,7 @@
 </ion-content>
 
 <ion-footer>
-  <ion-item>
+  <ion-item *ngIf="historyMode === 'rms'">
     <ion-segment [scrollable]="true" color="tertiary">
       <ion-segment-button 
         *ngFor="let exercise of exerciseOptions"
