@@ -37,7 +37,7 @@
             </div>
             <div
               class="set w-full flex justify-around items-center gap-2 py-2"
-              *ngFor="let set of createSetsRange(item.sets), let i = index"
+              *ngFor="let set of createSetsArr(item.sets), let i = index"
               [formGroupName]="i">
               <p>{{ set }}</p> 
   

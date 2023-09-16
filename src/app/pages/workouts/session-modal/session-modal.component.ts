@@ -2,10 +2,11 @@ import { WorkoutService } from 'src/app/services/workout/workout.service';
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { IonicModule, ModalController } from '@ionic/angular';
-import { Workout } from 'src/app/models/workouts';
+import { Session, Workout } from 'src/app/models/workouts';
 import { TimerComponent } from './timer/timer.component';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-session-modal',
@@ -22,21 +23,31 @@ import { v4 as uuidv4 } from 'uuid';
 export class SessionModalComponent  implements OnInit {
   
   @Input() workout!: Workout;
+
   public sessionForm!: FormGroup;
+  public timerSubscription!: Subscription;
+  public session: Session = {
+    id: '',
+    date: '',
+    sessionTime: '',
+    exercises: []
+  }
 
   constructor(
     private modalController: ModalController,
-    private workoutService: WorkoutService
-    ) {}
+    private workoutService: WorkoutService) {}
 
   ngOnInit() {
     console.log(this.workout);
     this.initForm();     
+    this.timerSubscription = this.workoutService.sessionTime.subscribe((value) => {
+      this.session.sessionTime = value;
+    })
   }
 
-  onSubmit() {
-    console.log(this.sessionForm);    
+  onSubmit() {  
     this.onClose();
+    this.saveSession(); 
   }
 
   initForm() {
@@ -47,7 +58,7 @@ export class SessionModalComponent  implements OnInit {
         sets: new FormArray([])
       });
       
-      for (let i = 0; i <= this.createSetsRange(item.sets).length; i++) {
+      for (let i = 0; i <= this.createSetsArr(item.sets).length; i++) {
          (<FormArray>exercise.get('sets')).push(new FormGroup({
           weight: new FormControl(null, Validators.required),
           reps: new FormControl(item.reps),
@@ -66,8 +77,20 @@ export class SessionModalComponent  implements OnInit {
     });
   }
 
-  createSetsRange(sets: number | undefined) {
+  createSetsArr(sets: number | undefined) {
     return new Array(sets).fill(0).map((n, index) => index + 1);
+  }
+
+  generateDate() {
+    const date = new Date();
+    const numericDate = date.toLocaleDateString();
+    return numericDate;
+  }
+
+  saveSession() {
+    this.session.id = uuidv4();
+    this.session.date = this.generateDate();
+    console.log(this.session);    
   }
 
   onClose() {

@@ -1,6 +1,7 @@
 export interface Session {
   id: string;
   date: string;
+  sessionTime: string;
   exercises: Exercise[];
 }
 

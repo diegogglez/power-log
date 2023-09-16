@@ -10,6 +10,7 @@ import { SessionModalComponent } from 'src/app/pages/workouts/session-modal/sess
 export class WorkoutService {
 
   public isWorkingOut$ = new Subject<boolean>();
+  public sessionTime = new Subject<string>();
 
   constructor(private modalController: ModalController) { }
 

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { WorkoutService } from 'src/app/services/workout/workout.service';
 
 @Component({
   selector: 'app-timer',
@@ -19,7 +20,7 @@ export class TimerComponent  implements OnInit, OnDestroy {
   public min: string = '00';
   public sec: string = '00';
 
-  constructor() { }
+  constructor(private workoutService: WorkoutService) { }
 
   ngOnInit() {
     this.start();
@@ -36,7 +37,7 @@ export class TimerComponent  implements OnInit, OnDestroy {
   }
 
   stop() {
-    clearInterval(this.timer);
+    clearInterval(this.timer);  
   }
 
   incrementTime() {
@@ -59,6 +60,9 @@ export class TimerComponent  implements OnInit, OnDestroy {
     this.hr = this.formatTime(h);
     this.min = this.formatTime(m);
     this.sec = this.formatTime(s);
+
+    const time = `${this.hr}:${this.min}:${this.sec}`
+    this.workoutService.sessionTime.next(time); 
   }
 
   formatTime(value: number) {
