@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { StorageService } from 'src/app/services/storage/storage.service';
 import { RmsHistoryComponent } from './rms-history/rms-history.component';
 import { SessionsHistoryComponent } from './sessions-history/sessions-history.component';
 
@@ -24,9 +23,7 @@ export class HistoryPage {
   historyMode: string = 'rms'
   history: any[] = [];
 
-  constructor(
-    private storage: StorageService
-    ) { }
+  constructor() { }
 
   setHistoryMode(event: any) {
     const mode = event.detail.value;

@@ -18,7 +18,7 @@ export class RmsHistoryComponent  implements OnInit {
 
   @Input() history!: any;
 
-  public refreshSubscription!: Subscription
+  public refreshSubscription!: Subscription;
   public itemToDelete: any;
   public exerciseOptions: string[] = [
     'Squats',
