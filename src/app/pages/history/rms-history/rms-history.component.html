@@ -1,4 +1,15 @@
 <ion-content>
+  <ion-header>
+    <ion-item>
+      <ion-segment [scrollable]="true" color="tertiary">
+        <ion-segment-button 
+          *ngFor="let exercise of exerciseOptions"
+          (click)="filterExercises(exercise)">
+          {{ exercise }}
+        </ion-segment-button>
+      </ion-segment>
+    </ion-item>
+  </ion-header>
   <p *ngIf="!history.length">No RMs saved yet</p>
   <ion-list>
     <ion-item-sliding *ngFor="let item of history" (ionSwipe)="presentAlert(item)">
@@ -43,14 +54,4 @@
   </ion-list>
 </ion-content>
 
-<ion-footer>
-  <ion-item>
-    <ion-segment [scrollable]="true" color="tertiary">
-      <ion-segment-button 
-        *ngFor="let exercise of exerciseOptions"
-        (click)="filterExercises(exercise)">
-        {{ exercise }}
-      </ion-segment-button>
-    </ion-segment>
-  </ion-item>
-</ion-footer>
+
