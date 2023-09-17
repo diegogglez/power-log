@@ -7,6 +7,7 @@ import { TimerComponent } from './timer/timer.component';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import { Subscription } from 'rxjs';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-session-modal',
@@ -28,6 +29,7 @@ export class SessionModalComponent  implements OnInit {
   public timerSubscription!: Subscription;
   public session: Session = {
     id: '',
+    workoutName:'',
     date: '',
     sessionTime: '',
     exercises: []
@@ -35,7 +37,8 @@ export class SessionModalComponent  implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private workoutService: WorkoutService) {}
+    private workoutService: WorkoutService,
+    private storageService: StorageService) {}
 
   ngOnInit() {
     console.log(this.workout);
@@ -90,9 +93,13 @@ export class SessionModalComponent  implements OnInit {
 
   saveSession() {
     this.session.id = uuidv4();
+    this.session.workoutName = this.sessionForm.value.name;
     this.session.date = this.generateDate();
     this.session.exercises = this.sessionForm.value.exercises;
-    console.log(this.session);    
+    console.log(this.session);  
+    console.log(this.sessionForm.value);
+    
+    this.storageService.addSession(this.session)
   }
 
   onClose() {
