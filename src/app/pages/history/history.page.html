@@ -6,55 +6,64 @@
         value="{{historyMode}}" 
         slot="end">
         <ion-radio value="rms">RMs</ion-radio>
-        <ion-radio value="workouts">Workouts</ion-radio>
+        <ion-radio value="sessions">Sessions</ion-radio>
       </ion-radio-group>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 
-  <p *ngIf="!history.length && historyMode === 'rms'">No RMs saved yet</p>
-  <ion-list *ngIf="history.length && historyMode === 'rms'">
-    <ion-item-sliding *ngFor="let item of history" (ionSwipe)="presentAlert(item)">
-      <ion-item-options side="start">
-        <ion-item-option 
-          color="translucent" 
-          (click)="presentAlert(item)">
-          <ion-icon 
-            name="trash" 
-            slot="icon-only" 
-            color="danger"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-      <ion-item class="border-b border-b-white/20">
-        <ion-label>
-          <div class="h-20 flex justify-between items-center py-2.5 m-0">
-            <h2>{{ item.rm }}{{ item.units }}</h2>
-        
-            <div class="h-full flex justify-center items-center gap-2.5">
-                <div class="flex flex-col justify-center items-center gap-2.5">
-                  <p>Weight</p>
-                  <p>{{ item.weight }}</p>
-                </div>
-                <div class="flex flex-col justify-center items-center gap-2.5">
-                  <p>Reps</p>
-                  <p>{{ item.reps }}</p>
-                </div>
-                <div class="flex flex-col justify-center items-center gap-2.5">
-                  <p>rpe</p>
-                  <p>{{ item.rpe }}</p>
-                </div>
+  <section class="rms" *ngIf="historyMode === 'rms'">
+    <p *ngIf="!history.length">No RMs saved yet</p>
+    <ion-list>
+      <ion-item-sliding *ngFor="let item of history" (ionSwipe)="presentAlert(item)">
+        <ion-item-options side="start">
+          <ion-item-option 
+            color="translucent" 
+            (click)="presentAlert(item)">
+            <ion-icon 
+              name="trash" 
+              slot="icon-only" 
+              color="danger"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+        <ion-item class="border-b border-b-white/20">
+          <ion-label>
+            <div class="h-20 flex justify-between items-center py-2.5 m-0">
+              <h2>{{ item.rm }}{{ item.units }}</h2>
+          
+              <div class="h-full flex justify-center items-center gap-2.5">
+                  <div class="flex flex-col justify-center items-center gap-2.5">
+                    <p>Weight</p>
+                    <p>{{ item.weight }}</p>
+                  </div>
+                  <div class="flex flex-col justify-center items-center gap-2.5">
+                    <p>Reps</p>
+                    <p>{{ item.reps }}</p>
+                  </div>
+                  <div class="flex flex-col justify-center items-center gap-2.5">
+                    <p>rpe</p>
+                    <p>{{ item.rpe }}</p>
+                  </div>
+              </div>
+              
+              <div class="h-full w-20 flex flex-col justify-center items-end gap-2.5">
+                <ion-badge>{{ item.exercise }}</ion-badge>
+                <p>{{ item.date }}</p>
+              </div>
             </div>
-            
-            <div class="h-full w-20 flex flex-col justify-center items-end gap-2.5">
-              <ion-badge>{{ item.exercise }}</ion-badge>
-              <p>{{ item.date }}</p>
-            </div>
-          </div>
-        </ion-label>
-      </ion-item>
-    </ion-item-sliding>
-  </ion-list>
+          </ion-label>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+  </section>
+
+  <section class="sessions" *ngIf="historyMode === 'sessions'">
+    <p>hola</p>
+    <ion-list>
+    </ion-list>
+  </section>
+
 </ion-content>
 
 <ion-footer>

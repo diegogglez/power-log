@@ -45,6 +45,7 @@ export class HistoryPage {
   setHistoryMode(event: any) {
     const mode = event.detail.value;
     this.historyMode = mode;
+    console.log(this.historyMode);
     this.loadHistory();
   }
 
@@ -53,7 +54,8 @@ export class HistoryPage {
   }
 
   async getSessions() {
-    console.log('sessions');
+    this.history = await this.storage.getSessions();
+    console.log(this.history);    
   }
 
   async getRMs() {
