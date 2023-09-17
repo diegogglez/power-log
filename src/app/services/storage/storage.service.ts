@@ -1,11 +1,10 @@
-import { rmsSeed } from './../../../utils/rmsSeed';
-import { workoutSeed } from '../../../utils/workoutSeed';
 import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
 import { Subject } from 'rxjs'
+import { rmsSeed } from './../../../utils/rmsSeed';
+import { workoutSeed } from '../../../utils/workoutSeed';
 import { RMItem } from '../../models/rms';
-import { Workout } from '../../models/workouts';
-import { Session } from 'inspector';
+import { Session, Workout } from '../../models/workouts';
 
 @Injectable({
   providedIn: 'root'
@@ -77,6 +76,7 @@ export class StorageService {
 
   async addWorkout(workout: Workout) {
     const workoutsSaved = await this.getWorkouts();
+    console.log(workoutsSaved);
     workoutsSaved.unshift(workout); 
     console.log(workoutsSaved);
     await Preferences.set({key: 'workouts', value: JSON.stringify(workoutsSaved)})
@@ -111,5 +111,20 @@ export class StorageService {
     }
 
     return JSON.parse(sessionsSaved.value || '[]');
+  }
+
+  async addSession(session: Session) {
+    const sessionsSaved = await this.getSessions();
+    sessionsSaved.unshift(session);
+    await Preferences.set({key: 'sessions', value: JSON.stringify(sessionsSaved)})
+      .then(() => this.refresh$.next());
+  }
+
+  async deleteSession(session: Session) {
+    const sessionsSaved = await this.getSessions();
+    const index = sessionsSaved.findIndex((item: Session) => item.id === session.id);
+    sessionsSaved.splice(index, 1);
+    await Preferences.set({key: 'sessions', value: JSON.stringify(sessionsSaved)})
+      .then(() => this.refresh$.next());
   }
 }
