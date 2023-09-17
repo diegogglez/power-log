@@ -13,67 +13,14 @@
 
 <ion-content [fullscreen]="true">
 
-  <section class="rms" *ngIf="historyMode === 'rms'">
-    <p *ngIf="!history.length">No RMs saved yet</p>
-    <ion-list>
-      <ion-item-sliding *ngFor="let item of history" (ionSwipe)="presentAlert(item)">
-        <ion-item-options side="start">
-          <ion-item-option 
-            color="translucent" 
-            (click)="presentAlert(item)">
-            <ion-icon 
-              name="trash" 
-              slot="icon-only" 
-              color="danger"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-        <ion-item class="border-b border-b-white/20">
-          <ion-label>
-            <div class="h-20 flex justify-between items-center py-2.5 m-0">
-              <h2>{{ item.rm }}{{ item.units }}</h2>
-          
-              <div class="h-full flex justify-center items-center gap-2.5">
-                  <div class="flex flex-col justify-center items-center gap-2.5">
-                    <p>Weight</p>
-                    <p>{{ item.weight }}</p>
-                  </div>
-                  <div class="flex flex-col justify-center items-center gap-2.5">
-                    <p>Reps</p>
-                    <p>{{ item.reps }}</p>
-                  </div>
-                  <div class="flex flex-col justify-center items-center gap-2.5">
-                    <p>rpe</p>
-                    <p>{{ item.rpe }}</p>
-                  </div>
-              </div>
-              
-              <div class="h-full w-20 flex flex-col justify-center items-end gap-2.5">
-                <ion-badge>{{ item.exercise }}</ion-badge>
-                <p>{{ item.date }}</p>
-              </div>
-            </div>
-          </ion-label>
-        </ion-item>
-      </ion-item-sliding>
-    </ion-list>
-  </section>
+  <app-rms-history
+    *ngIf="historyMode === 'rms'" 
+    history="{{history}}"></app-rms-history>
 
-  <section class="sessions" *ngIf="historyMode === 'sessions'">
-    <p>hola</p>
-    <ion-list>
-    </ion-list>
-  </section>
-
+  <app-sessions-history
+    *ngIf="historyMode === 'sessions'"
+    history="{{history}}"></app-sessions-history>
+    
 </ion-content>
 
-<ion-footer>
-  <ion-item *ngIf="historyMode === 'rms'">
-    <ion-segment [scrollable]="true" color="tertiary">
-      <ion-segment-button 
-        *ngFor="let exercise of exerciseOptions"
-        (click)="filterExercises(exercise)">
-        {{ exercise }}
-      </ion-segment-button>
-    </ion-segment>
-  </ion-item>
-</ion-footer>
+
