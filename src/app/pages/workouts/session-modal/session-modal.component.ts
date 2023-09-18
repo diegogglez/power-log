@@ -97,7 +97,7 @@ export class SessionModalComponent  implements OnInit {
     this.session.date = this.generateDate();
     this.session.exercises = this.sessionForm.value.exercises;
     console.log(this.session);  
-    console.log(this.sessionForm.value);
+    // console.log(this.sessionForm.value);
     
     this.storageService.addSession(this.session)
   }

@@ -31,9 +31,7 @@ export class SessionsHistoryComponent  implements OnInit {
 
   async getSessions() {
     this.history = await this.storageService.getSessions();
-    // this.filterHistory();    
-    console.log(this.history);
-    
+    this.filterHistory();        
   }
 
   filterHistory() { 
