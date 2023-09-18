@@ -5,7 +5,7 @@ import { HomePage } from "./home.page";
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home/profile',
+    redirectTo: '/home/dashboard',
     pathMatch: 'full'
   },
   {
