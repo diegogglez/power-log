@@ -1,10 +1,8 @@
-import { Session } from './../../../models/workouts';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AlertController, IonicModule } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { RMItem } from 'src/app/models/rms';
 import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
@@ -41,7 +39,6 @@ export class RmsHistoryComponent  implements OnInit {
 
   async getRMs() {
     this.history = await this.storageService.getRMs();
-    console.log(this.history);
   }
 
   async presentAlert(item: any) {
