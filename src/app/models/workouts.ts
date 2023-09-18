@@ -3,7 +3,7 @@ export interface Session {
   workoutName: string;
   date: string;
   sessionTime: string;
-  exercises: Exercise[];
+  exercises: any;
 }
 
 export interface Workout {
