@@ -13,8 +13,8 @@ export const routes: Routes = [
     component: HomePage,
     children: [
       {
-        path: 'profile',
-        loadComponent: () => import('../profile/profile.page').then((m) => m.ProfilePage)
+        path: 'dashboard',
+        loadComponent: () => import('../dashboard/dashboard.page').then((m) => m.DashboardPage)
       },
       {
         path: 'history',

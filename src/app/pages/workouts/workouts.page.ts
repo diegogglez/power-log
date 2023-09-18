@@ -41,10 +41,6 @@ export class WorkoutsPage {
     })
   }
 
-  launchSeed() {
-    this.storage.workoutSeed();
-  }
-
   async getWorkouts() {
     this.workoutsSaved = await this.storage.getWorkouts();
     console.log(this.workoutsSaved);

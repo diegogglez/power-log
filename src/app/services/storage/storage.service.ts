@@ -3,6 +3,7 @@ import { Preferences } from '@capacitor/preferences';
 import { Subject } from 'rxjs'
 import { rmsSeed } from './../../../utils/rmsSeed';
 import { workoutSeed } from '../../../utils/workoutSeed';
+import { sessionsSeed } from '../../../utils/sessionsSeed';
 import { RMItem } from '../../models/rms';
 import { Session, Workout } from '../../models/workouts';
 
@@ -19,13 +20,33 @@ export class StorageService {
     return this.refresh$;
   }
 
-  //* RMs
+  //* SEEDS
+
+  initSeeds() {
+    this.rmsSeed();
+    this.workoutSeed();
+    this.sessionsSeed();
+  }
 
   async rmsSeed() {
     const emptyRms: RMItem[] = [];
     await Preferences.set({key: 'RMs', value: JSON.stringify(emptyRms)});
     await Preferences.set({key: 'RMs', value: JSON.stringify(rmsSeed)});
   }
+
+  async workoutSeed() {
+    const emptyWorkouts: Workout[] = [];
+    await Preferences.set({key: 'workouts', value: JSON.stringify(emptyWorkouts)});
+    await Preferences.set({key: 'workouts', value: JSON.stringify(workoutSeed)});
+  }
+
+  async sessionsSeed() {
+    const emptySessions: Session[] = [];
+    await Preferences.set({key: 'sessions', value: JSON.stringify(emptySessions)});
+    await Preferences.set({key: 'sessions', value: JSON.stringify(sessionsSeed)});
+  }
+
+  //* RMs
 
   async getRMs() {
     const rmHistory = await Preferences.get({key: 'RMs'})
@@ -56,12 +77,6 @@ export class StorageService {
   }
 
   //* WORKOUTS
-
-  async workoutSeed() {
-    const emptyWorkouts: Workout[] = [];
-    await Preferences.set({key: 'workouts', value: JSON.stringify(emptyWorkouts)});
-    await Preferences.set({key: 'workouts', value: JSON.stringify(workoutSeed)});
-  }
 
   async getWorkouts() {
     const workoutsSaved = await Preferences.get({key: 'workouts'})

@@ -37,11 +37,7 @@ export class RmCalculatorPage implements OnInit {
 
   constructor(private storageService: StorageService) {}
 
-  ngOnInit() { }
-
-  rmsSeed() {
-    this.storageService.rmsSeed();
-  }
+  ngOnInit() {}
 
   isValid() {
     this.reps > 0 && this.reps <= 12 
