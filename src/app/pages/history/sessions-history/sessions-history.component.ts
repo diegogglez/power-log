@@ -31,12 +31,23 @@ export class SessionsHistoryComponent  implements OnInit {
 
   async getSessions() {
     this.history = await this.storageService.getSessions();
-    console.log(this.history);    
+    // this.filterHistory();    
+    console.log(this.history);
+    
   }
 
-  formatSessions() {
-    //* We need to filter de data comming from the form, 
-    //* ignoring all the null exercises sets
+  filterHistory() { 
+    this.history.forEach((session: any) => {    
+      for (let exercise of session.exercises) {
+        let setsCleaned: any[] = [];
+        exercise.sets.forEach((set: any) => {
+          if (set.done) {
+            setsCleaned.push(set);
+          }         
+        });  
+        exercise.sets = setsCleaned;          
+      }           
+    }); 
   }
 
   async presentAlert(item: any) {

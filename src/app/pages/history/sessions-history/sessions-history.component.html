@@ -12,7 +12,7 @@
             color="danger"></ion-icon>
         </ion-item-option>
       </ion-item-options>
-      <ion-item class="border-b border-b-white/20" *ngFor="let item of history">
+      <ion-item class="border-b border-b-white/20">
         <ion-label>
           <div>
             <h1>{{item.workoutName}}</h1>
@@ -20,7 +20,11 @@
             <p>{{item.sessionTime}}</p>
             <div>
               <h2>Exercises</h2>
-              <p *ngFor="let exercise of item.exercises">{{exercise.name}}</p>
+              <div *ngFor="let exercise of item.exercises">
+                <div *ngIf="exercise.sets.length">
+                  <p>{{exercise.name}}, sets: <span>{{exercise.sets.length}}</span></p>
+                </div>
+              </div>
             </div>
           </div>
         </ion-label>
