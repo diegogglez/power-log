@@ -17,9 +17,9 @@ export interface Exercise {
   id: string;
   name: string;
   sets?: number;
+  rest?: string;
   reps?: number;
   weight?: number;
-  units?: string;
   rir?: number;
   rpe?: number;
 }
