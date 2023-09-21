@@ -1,6 +1,6 @@
 <ion-content>
   <p *ngIf="!history.length">No Sessions saved yet</p>
-  <ion-list>
+  <ion-list class="h-full">
       <ion-card *ngFor="let item of history">
         <ion-card-header>
           <div class="flex justify-between">
@@ -12,7 +12,7 @@
         <ion-card-content>
           <div *ngFor="let exercise of item.exercises">
             <div *ngIf="exercise.sets.length">
-              <p>{{exercise.name}}, sets: <span>{{exercise.sets.length}}</span></p>
+              <p>{{exercise.name}} <span>({{exercise.sets.length}} sets)</span></p>
             </div>
           </div>
         </ion-card-content>
