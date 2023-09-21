@@ -21,8 +21,8 @@
       </div>
     </ion-toolbar>
     
-    <section>
-      <div class="flex flex-col items-center justify-center gap-5 py-5 px-2">
+    <section class="w-full flex flex-col items-center justify-center gap-5 py-5 px-2">
+      <div class="w-11/12 flex flex-col items-center gap-2.5">
         <ion-input
           placeholder="Workout name"
           formControlName="name"
@@ -39,15 +39,17 @@
           color="tertiary"
           labelPlacement="floating">
         </ion-input>
-  
+      </div>
+
+      <div 
+        formArrayName="exercises" 
+        class="w-full flex flex-col items-center">
+        <h2 *ngIf="exercises.length" class="text-xl">Exercises</h2>
         <div 
-          formArrayName="exercises" 
-          class="flex flex-col items-center">
-          <h2 *ngIf="exercises.length" class="text-xl">Exercises</h2>
-          <div 
-            *ngFor="let item of exercises; let i = index"
-            [formGroupName]="i"
-            class="flex flex-col items-center justify-center gap-2 border-b border-white/10 py-3">
+          *ngFor="let item of exercises; let i = index"
+          [formGroupName]="i"
+          class="w-11/12 flex flex-col items-center justify-center gap-2 border-b border-white/10 py-3">
+          <div class="w-full flex justify-between items-center gap-2.5">
             <ion-input
               placeholder="Exercise name"
               fill="outline"
@@ -56,8 +58,19 @@
               labelPlacement="floating"
               formControlName="name">
             </ion-input>
-            <div class="flex items-center gap-2">
+            <ion-icon
+              (click)="onDeleteExercise(i)"
+              class="w-10" 
+              name="trash" 
+              slot="icon-only"
+              size="large" 
+              color="danger">
+            </ion-icon>
+          </div>
+          <div class="w-full flex flex-col items-center justify-between gap-2">
+            <div class="w-full flex justify-between gap-2">
               <ion-input
+                class="input"
                 placeholder="sets"
                 fill="outline"
                 label="Sets"
@@ -66,6 +79,7 @@
                 formControlName="sets">
               </ion-input>
               <ion-input
+                class="input"
                 placeholder="reps"
                 fill="outline"
                 label="Reps"
@@ -74,6 +88,18 @@
                 formControlName="reps">
               </ion-input>
               <ion-input
+                class="input"
+                placeholder="Weight"
+                fill="outline"
+                label="Weight"
+                color="tertiary"
+                labelPlacement="floating"
+                formControlName="weight">
+              </ion-input>
+            </div>
+            <div class="w-full flex justify-between gap-2">
+              <ion-input
+                class="input"
                 placeholder="RIR"
                 fill="outline"
                 label="RIR"
@@ -81,31 +107,42 @@
                 labelPlacement="floating"
                 formControlName="rir">
               </ion-input>
-              <ion-button 
-                type="button"
-                fill="translucent" 
-                color="danger" 
-                (click)="onDeleteExercise(i)">
-                <ion-icon name="trash" slot="icon-only" color="danger"></ion-icon>
-              </ion-button>
-          </div>
-          </div>
+              <ion-input
+                class="input"
+                placeholder="RPE"
+                fill="outline"
+                label="RPE"
+                color="tertiary"
+                labelPlacement="floating"
+                formControlName="rpe">
+              </ion-input>
+              <ion-input
+                class="input"
+                placeholder="Rest"
+                fill="outline"
+                label="Rest"
+                color="tertiary"
+                labelPlacement="floating"
+                formControlName="rest">
+              </ion-input>
+            </div>
         </div>
-    
-        <ion-button
-          type="button"
-          class="w-48"
-          fill="outline" 
-          color="tertiary"
-          (click)="onAddExercise()">
-          add exercise
-          <ion-icon 
-            name="add-outline" 
-            color="tertiary" 
-            slot="icon-only">
-          </ion-icon>
-        </ion-button>
+        </div>
       </div>
+  
+      <ion-button
+        type="button"
+        class="w-48"
+        fill="outline" 
+        color="tertiary"
+        (click)="onAddExercise()">
+        add exercise
+        <ion-icon 
+          name="add-outline" 
+          color="tertiary" 
+          slot="icon-only">
+        </ion-icon>
+      </ion-button>
     </section>
   </form>
 </ion-content>

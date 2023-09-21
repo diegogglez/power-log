@@ -61,9 +61,12 @@ export class WorkoutModalComponent  implements OnInit {
             new FormGroup({
               'id': new FormControl(item.id),
               'name': new FormControl(item.name),
-              'reps': new FormControl(item.reps),
               'sets': new FormControl(item.sets),
+              'reps': new FormControl(item.reps),
+              'weight': new FormControl(item.weight),
               'rir': new FormControl(item.rir),
+              'rpe': new FormControl(item.rpe),
+              'rest': new FormControl(item.rest)
             })
           );
         }
@@ -84,7 +87,10 @@ export class WorkoutModalComponent  implements OnInit {
         name: new FormControl(null),
         sets: new FormControl(null),
         reps: new FormControl(null),
-        rir: new FormControl(null)
+        weight: new FormControl(null),
+        rir: new FormControl(null),
+        rpe: new FormControl(null),
+        rest: new FormControl(null)
       })
     );
   }
