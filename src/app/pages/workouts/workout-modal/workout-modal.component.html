@@ -48,7 +48,7 @@
         <div 
           *ngFor="let item of exercises; let i = index"
           [formGroupName]="i"
-          class="w-11/12 flex flex-col items-center justify-center gap-2 border-b border-white/10 py-3">
+          class="w-11/12 flex flex-col items-center justify-center gap-2 border-b border-white/10 py-5">
           <div class="w-full flex justify-between items-center gap-2.5">
             <ion-input
               placeholder="Exercise name"
@@ -58,20 +58,20 @@
               labelPlacement="floating"
               formControlName="name">
             </ion-input>
-            <ion-icon
-              (click)="onDeleteExercise(i)"
-              class="w-10" 
-              name="trash" 
-              slot="icon-only"
-              size="large" 
-              color="danger">
-            </ion-icon>
+            <div class="icon">
+              <ion-icon
+                (click)="onDeleteExercise(i)"
+                name="trash" 
+                slot="icon-only"
+                size="large" 
+                color="danger">
+              </ion-icon>
+            </div>
           </div>
           <div class="w-full flex flex-col items-center justify-between gap-2">
             <div class="w-full flex justify-between gap-2">
               <ion-input
                 class="input"
-                placeholder="sets"
                 fill="outline"
                 label="Sets"
                 color="tertiary"
@@ -80,7 +80,6 @@
               </ion-input>
               <ion-input
                 class="input"
-                placeholder="reps"
                 fill="outline"
                 label="Reps"
                 color="tertiary"
@@ -89,7 +88,6 @@
               </ion-input>
               <ion-input
                 class="input"
-                placeholder="Weight"
                 fill="outline"
                 label="Weight"
                 color="tertiary"
@@ -100,14 +98,13 @@
             <div class="w-full flex justify-between gap-2">
               <ion-input
                 class="input"
-                placeholder="RIR"
                 fill="outline"
                 label="RIR"
                 color="tertiary"
                 labelPlacement="floating"
                 formControlName="rir">
               </ion-input>
-              <ion-input
+              <!-- <ion-input
                 class="input"
                 placeholder="RPE"
                 fill="outline"
@@ -115,16 +112,27 @@
                 color="tertiary"
                 labelPlacement="floating"
                 formControlName="rpe">
-              </ion-input>
+              </ion-input> -->
               <ion-input
                 class="input"
-                placeholder="Rest"
                 fill="outline"
                 label="Rest"
                 color="tertiary"
                 labelPlacement="floating"
                 formControlName="rest">
               </ion-input>
+              <!-- <div class="icon">
+                <ion-icon
+                  (click)="onDeleteExercise(i)"
+                  name="trash" 
+                  slot="icon-only"
+                  size="large" 
+                  color="danger">
+                </ion-icon>
+              </div> -->
+              <div class="toggle">
+                <ion-toggle labelPlacement="start" color="tertiary" mode="ios">RPE</ion-toggle>
+              </div>
             </div>
         </div>
         </div>

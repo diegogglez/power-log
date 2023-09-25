@@ -53,7 +53,7 @@ export class WorkoutsPage {
         workout,
       },
       breakpoints: [0, 0.5, 0.7, 1],
-      initialBreakpoint: 0.7,
+      initialBreakpoint: 1,
     });
     await modal.present();
   }
