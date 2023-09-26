@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { ReactiveFormsModule, FormGroup, FormControl, FormArray } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormControl, FormArray, AbstractControl } from '@angular/forms';
 import { IonicModule, ModalController, ToastController } from '@ionic/angular';
 import { Workout } from 'src/app/models/workouts';
 import { StorageService } from 'src/app/services/storage/storage.service';
@@ -21,7 +21,9 @@ export class WorkoutModalComponent  implements OnInit {
 
   @Input() workout!: Workout;
   public editMode: boolean = false;
-  public workoutForm!: FormGroup;
+  public workoutForm!: FormGroup<any>;
+
+  public rpe: boolean[] = [];
 
   get exercises() {
     return (<FormArray>this.workoutForm.get('exercises')).controls;
@@ -88,7 +90,7 @@ export class WorkoutModalComponent  implements OnInit {
         sets: new FormControl(null),
         reps: new FormControl(null),
         weight: new FormControl(null),
-        rir: new FormControl(null),
+        rir: new FormControl({ value: null, disabled: false }),
         rpe: new FormControl(null),
         rest: new FormControl(null)
       })
@@ -123,5 +125,10 @@ export class WorkoutModalComponent  implements OnInit {
       position: 'bottom'
     });
     await toast.present();
+  }
+
+  toggleRPE(e: any, index: any) {
+    this.rpe[index] = e.detail.checked;
+    console.log(this.rpe);    
   }
 }
