@@ -91,7 +91,6 @@ export class StorageService {
 
   async addWorkout(workout: Workout) {
     const workoutsSaved = await this.getWorkouts();
-    console.log(workoutsSaved);
     workoutsSaved.unshift(workout); 
     console.log(workoutsSaved);
     await Preferences.set({key: 'workouts', value: JSON.stringify(workoutsSaved)})
