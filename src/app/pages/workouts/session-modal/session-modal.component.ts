@@ -64,7 +64,7 @@ export class SessionModalComponent  implements OnInit {
       
       for (let i = 0; i <= this.createSetsArr(item.sets).length; i++) {
          (<FormArray>exercise.get('sets')).push(new FormGroup({
-          weight: new FormControl(null, Validators.required),
+          weight: new FormControl(item.weight, Validators.required),
           reps: new FormControl(item.reps),
           rir: new FormControl(item.rir),
           done: new FormControl(false, Validators.requiredTrue)
