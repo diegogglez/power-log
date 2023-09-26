@@ -45,7 +45,7 @@
         </div>
       </div>
       <div class="w-full flex flex-col justify-center items-start gap-1.5">
-        <p *ngFor="let exercise of item.exercises">{{ exercise.name }} {{ exercise.sets }}x{{ exercise.reps }} (RIR: {{ exercise.rir }})</p>
+        <p *ngFor="let exercise of item.exercises">{{ exercise.name }}: {{ exercise.sets }}x{{ exercise.reps }}</p>
       </div>
       <div>
         <ion-button 
