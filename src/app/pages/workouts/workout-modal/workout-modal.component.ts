@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { ReactiveFormsModule, FormGroup, FormControl, FormArray, AbstractControl } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { IonicModule, ModalController, ToastController } from '@ionic/angular';
-import { Workout } from 'src/app/models/workouts';
+import { Exercise, Workout } from 'src/app/models/workouts';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -23,7 +23,7 @@ export class WorkoutModalComponent  implements OnInit {
   public editMode: boolean = false;
   public workoutForm!: FormGroup<any>;
 
-  public rpe: boolean[] = [];
+  public rpeArr: any = [];
 
   get exercises() {
     return (<FormArray>this.workoutForm.get('exercises')).controls;
@@ -36,7 +36,12 @@ export class WorkoutModalComponent  implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.workout ? this.editMode = true : this.editMode = false;
+    if (this.workout) {
+      this.editMode = true;
+      this.initRpeArr(this.workout.exercises);
+    } else {
+      this.editMode = false;
+    }
     this.initForm();
   }
 
@@ -58,7 +63,7 @@ export class WorkoutModalComponent  implements OnInit {
       workoutDescription = this.workout.description;
 
       if (workout.exercises) {
-        for (let item of workout.exercises) {
+        for (let item of workout.exercises) {          
           workoutExercises.push(
             new FormGroup({
               'id': new FormControl(item.id),
@@ -66,7 +71,8 @@ export class WorkoutModalComponent  implements OnInit {
               'sets': new FormControl(item.sets),
               'reps': new FormControl(item.reps),
               'weight': new FormControl(item.weight),
-              'rir': new FormControl(item.rir),
+              'rir': new FormControl({value: item.rir, disabled: item.enterRpe ? true : false}),
+              'enterRpe': new FormControl(item.enterRpe),
               'rpe': new FormControl(item.rpe),
               'rest': new FormControl(item.rest)
             })
@@ -90,7 +96,8 @@ export class WorkoutModalComponent  implements OnInit {
         sets: new FormControl(null),
         reps: new FormControl(null),
         weight: new FormControl(null),
-        rir: new FormControl({ value: null, disabled: false }),
+        rir: new FormControl(null),
+        enterRpe: new FormControl(null),
         rpe: new FormControl(null),
         rest: new FormControl(null)
       })
@@ -103,6 +110,8 @@ export class WorkoutModalComponent  implements OnInit {
 
   async saveWorkout() {
     const workout: Workout = this.workoutForm.value;
+    console.log(workout);
+    
 
     if (this.editMode) {
       await this.storageService.updateWorkout(workout);
@@ -127,8 +136,13 @@ export class WorkoutModalComponent  implements OnInit {
     await toast.present();
   }
 
-  toggleRPE(e: any, index: any) {
-    this.rpe[index] = e.detail.checked;
-    console.log(this.rpe);    
+  toggleRPE(e: any, index: number) {
+    this.rpeArr[index] = e.detail.checked;   
+  }
+
+  initRpeArr(exercises: any) {
+    exercises.forEach((exercise: Exercise, index: number) => {
+      exercise.enterRpe ? this.rpeArr[index] = exercise.enterRpe : this.rpeArr[index] = false;
+    });
   }
 }

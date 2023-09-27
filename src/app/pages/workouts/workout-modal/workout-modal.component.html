@@ -107,8 +107,8 @@
                 type="number"
                 [ngClass]="{ 
                   'input': true, 
-                  'input-disabled': rpe[i], 
-                  'rir-clickable': rpe[i]
+                  'input-disabled': rpeArr[i], 
+                  'rir-clickable': rpeArr[i]
                 }"
                 fill="outline"
                 label="RIR"
@@ -129,7 +129,8 @@
                   (ionChange)="toggleRPE($event, i)"
                   labelPlacement="start" 
                   color="tertiary" 
-                  mode="ios">RPE
+                  mode="ios"
+                  formControlName="enterRpe">RPE
                 </ion-toggle>
               </div>
             </div>
