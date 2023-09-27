@@ -21,5 +21,6 @@ export interface Exercise {
   reps?: number;
   weight?: number;
   rir?: number;
+  enterRpe?: boolean;
   rpe?: number;
 }
