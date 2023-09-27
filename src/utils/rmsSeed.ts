@@ -14,92 +14,92 @@ export const rmsSeed: RMItem[] = [
   },
   {
     id: uuidv4(),
-    rm: 113.90,
-    weight: 100,
+    rm: 216.92,
+    weight: 200,
     units: 'kg',
     reps: 3,
-    rpe: 8.5,
+    rpe: 9,
     exercise: 'Deadlift',
-    date: '14/9/2023'
+    date: '15/9/2023'
   },
   {
     id: uuidv4(),
-    rm: 113.90,
-    weight: 100,
+    rm: 57.94,
+    weight: 50,
     units: 'kg',
     reps: 3,
-    rpe: 8.5,
+    rpe: 8,
     exercise: 'Overhead Press',
-    date: '14/9/2023'
+    date: '16/9/2023'
   },
   {
     id: uuidv4(),
-    rm: 113.90,
-    weight: 100,
+    rm: 202.98,
+    weight: 150,
     units: 'kg',
-    reps: 3,
-    rpe: 8.5,
+    reps: 8,
+    rpe: 8,
     exercise: 'Deadlift',
-    date: '14/9/2023'
+    date: '17/9/2023'
   },
   {
     id: uuidv4(),
-    rm: 113.90,
-    weight: 100,
+    rm: 56.24,
+    weight: 55,
     units: 'kg',
-    reps: 3,
-    rpe: 8.5,
+    reps: 1,
+    rpe: 9.5,
     exercise: 'Overhead Press',
-    date: '14/9/2023'
+    date: '18/9/2023'
   },
   {
     id: uuidv4(),
-    rm: 113.90,
-    weight: 100,
+    rm: 56.05,
+    weight: 50,
     units: 'kg',
     reps: 3,
-    rpe: 8.5,
+    rpe: 9,
     exercise: 'Pull Ups',
-    date: '14/9/2023'
+    date: '19/9/2023'
   },
   {
     id: uuidv4(),
-    rm: 113.90,
-    weight: 100,
+    rm: 107.53,
+    weight: 90,
     units: 'kg',
-    reps: 3,
-    rpe: 8.5,
+    reps: 5,
+    rpe: 9,
     exercise: 'Bench Press',
-    date: '14/9/2023'
+    date: '20/9/2023'
   },
   {
     id: uuidv4(),
-    rm: 113.90,
-    weight: 100,
+    rm: 57.94,
+    weight: 50,
     units: 'kg',
-    reps: 3,
-    rpe: 8.5,
+    reps: 2,
+    rpe: 7,
     exercise: 'Pull Ups',
-    date: '14/9/2023'
+    date: '21/9/2023'
   },
   {
     id: uuidv4(),
-    rm: 113.90,
-    weight: 100,
+    rm: 131.42,
+    weight: 110,
     units: 'kg',
     reps: 3,
-    rpe: 8.5,
+    rpe: 7,
     exercise: 'Squats',
-    date: '14/9/2023'
+    date: '22/9/2023'
   },
   {
     id: uuidv4(),
-    rm: 113.90,
-    weight: 100,
+    rm: 127.80,
+    weight: 120,
     units: 'kg',
-    reps: 3,
+    reps: 1,
     rpe: 8.5,
     exercise: 'Squats',
-    date: '14/9/2023'
+    date: '23/9/2023'
   },
 ]
