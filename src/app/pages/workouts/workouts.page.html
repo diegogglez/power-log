@@ -22,44 +22,47 @@
   </section>
 
   <section class="flex flex-col justify-center items-center gap-2.5 p-4">
-    <div 
-      *ngFor="let item of workoutsSaved" 
-      class="w-full flex flex-col justify-center items-center p-4 rounded gap-4 bg-[#1c1c1d]">
-      <div class="w-full flex justify-between items-center pb-2.5 border-b border-b-white/20">
-        <h2>{{ item.name }}</h2>
-        <div class="flex justify-center items-center gap-2.5">
-            <ion-icon 
-              (click)="onClickDelete(item)"
-              name="trash" 
-              slot="icon-only" 
-              size="large" 
-              color="tertiary">
-            </ion-icon>
-            <ion-icon 
-              (click)="openWorkoutModal(item)"
-              name="create-outline" 
-              slot="icon-only" 
-              size="large" 
-              color="tertiary">
-            </ion-icon>
+    <ion-card *ngFor="let item of workoutsSaved" class="w-full">
+      <ion-label>
+        <div class="flex flex-col justify-center items-center rounded p-4 gap-4">
+          <div class="w-full flex justify-between items-center pb-2.5 border-b border-b-white/20">
+            <ion-card-title>{{ item.name }}</ion-card-title>
+            <div class="flex justify-center items-center gap-2.5">
+                <ion-icon 
+                  (click)="onClickDelete(item)"
+                  name="trash" 
+                  slot="icon-only" 
+                  size="large" 
+                  color="tertiary">
+                </ion-icon>
+                <ion-icon 
+                  (click)="openWorkoutModal(item)"
+                  name="create-outline" 
+                  slot="icon-only" 
+                  size="large" 
+                  color="tertiary">
+                </ion-icon>
+            </div>
+          </div>
+          <div class="w-full flex flex-col justify-center items-start gap-1.5">
+            <p *ngFor="let exercise of item.exercises">{{ exercise.name }}: {{ exercise.sets }}x{{ exercise.reps }}</p>
+          </div>
+          <div>
+            <ion-button
+              class="play"
+              fill="outline" 
+              color="success"
+              [disabled]="startDisabled"
+              (click)="onStartWorkout(item)">
+              <ion-icon 
+                name="play-outline" 
+                color="success" 
+                slot="icon-only">
+              </ion-icon>
+            </ion-button>
+          </div>
         </div>
-      </div>
-      <div class="w-full flex flex-col justify-center items-start gap-1.5">
-        <p *ngFor="let exercise of item.exercises">{{ exercise.name }}: {{ exercise.sets }}x{{ exercise.reps }}</p>
-      </div>
-      <div>
-        <ion-button 
-          fill="outline" 
-          color="success"
-          [disabled]="startDisabled"
-          (click)="onStartWorkout(item)">
-          <ion-icon 
-            name="play-outline" 
-            color="success" 
-            slot="icon-only">
-          </ion-icon>
-        </ion-button>
-      </div>
-    </div>
+      </ion-label>
+    </ion-card>
   </section>
 </ion-content>
