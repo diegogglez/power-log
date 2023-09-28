@@ -86,7 +86,7 @@ export class WorkoutModalComponent  implements OnInit {
       'name': new FormControl(workoutName),
       'description': new FormControl(workoutDescription),
       'exercises': workoutExercises
-    })
+    });
   }
 
   onAddExercise() {
