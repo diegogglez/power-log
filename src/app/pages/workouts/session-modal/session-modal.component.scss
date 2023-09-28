@@ -1,16 +1,23 @@
-ion-input {
-  width: 50px;
+input {
+  border-radius: 3px;
+  background-color: transparent;
+  border: 1px solid rgba(255,255,255,0.5);
+  width: 45px;
   height: 30px;
-  margin: 0;
-}
-
-p {
-  width: 50px;
   text-align: center;
 }
 
+p {
+  width: 45px;
+  text-align: center;
+}
+
+.x {
+  width: 20px;
+}
+
 .checkbox {
-  width: 50px;
+  width: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,16 +25,4 @@ p {
 
 div.set.ng-valid {
   background-color: rgba(47,223,117, 0.2);
-}
-
-.checkbox-wrapper {
-  justify-content: center;
-}
-
-.sc-ion-input-md-h:not(.legacy-input) {
-  min-height: 30px;
-}
-
-label {
-  color: red;
 }

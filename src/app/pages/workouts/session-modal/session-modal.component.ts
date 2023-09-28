@@ -67,6 +67,7 @@ export class SessionModalComponent  implements OnInit {
           weight: new FormControl(item.weight, Validators.required),
           reps: new FormControl(item.reps),
           rir: new FormControl(item.rir),
+          rpe: new FormControl(item.rpe),
           done: new FormControl(false, Validators.requiredTrue)
         }));
       };
