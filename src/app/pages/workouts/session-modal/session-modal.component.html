@@ -21,9 +21,17 @@
     </ion-header>
     
     <section formArrayName="exercises">
-      <ion-card *ngFor="let item of workout.exercises; let i = index" [formGroupName]="i">
+      <ion-card
+        *ngFor="let item of workout.exercises; let i = index" 
+        [formGroupName]="i">
         <ion-card-header>
-          <ion-card-subtitle>{{ item.sets }} x {{ item.reps }} RIR {{ item.rir }}</ion-card-subtitle>
+          <ion-card-subtitle>
+            {{ item.sets }} x {{ item.reps }} 
+            <span 
+              *ngIf="!item.enterRpe">
+              RIR {{ item.rir }}
+            </span>
+          </ion-card-subtitle>
           <ion-card-title class="m-0">{{ item.name }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
