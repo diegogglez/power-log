@@ -127,6 +127,12 @@ export class StorageService {
     return JSON.parse(sessionsSaved.value || '[]');
   }
 
+  async getSessionById(id: string) {
+    const sessionsSaved = await this.getSessions();
+    const index = sessionsSaved.findIndex((item: Session) => item.id === id);
+    return sessionsSaved[index];
+  }
+
   async addSession(session: Session) {
     const sessionsSaved = await this.getSessions();
     sessionsSaved.unshift(session);

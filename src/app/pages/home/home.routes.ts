@@ -18,7 +18,11 @@ export const routes: Routes = [
       },
       {
         path: 'history',
-        loadComponent: () => import('../history/history.page').then((m) => m.HistoryPage)
+        loadComponent: () => import('../history/history.page').then((m) => m.HistoryPage),
+      },
+      {
+        path: 'history/:id',
+        loadComponent: () => import('../history/sessions-history/session-detail/session-detail.page').then((m) => m.SessionDetailPage)
       },
       {
         path: 'workouts',

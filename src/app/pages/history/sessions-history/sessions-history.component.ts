@@ -4,13 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { AlertController, IonicModule } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { StorageService } from 'src/app/services/storage/storage.service';
+import { RouterLink } from '@angular/router';
+import { Session } from 'src/app/models/workouts';
 
 @Component({
   selector: 'app-sessions-history',
   templateUrl: './sessions-history.component.html',
   styleUrls: ['./sessions-history.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, RouterLink]
 })
 export class SessionsHistoryComponent  implements OnInit {
 
@@ -31,7 +33,8 @@ export class SessionsHistoryComponent  implements OnInit {
 
   async getSessions() {
     this.history = await this.storageService.getSessions();
-    this.filterHistory();        
+    this.filterHistory();  
+    console.log(this.history);  
   }
 
   filterHistory() { 
@@ -72,6 +75,6 @@ export class SessionsHistoryComponent  implements OnInit {
   }
 
   async deleteItem(item: any) {
-    // await this.storageService.deleteRM(item);
+    // delete function
   }
 }

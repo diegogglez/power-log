@@ -1,7 +1,7 @@
 <ion-content>
   <p *ngIf="!history.length">No Sessions saved yet</p>
   <ion-list class="h-full">
-      <ion-card *ngFor="let item of history">
+    <ion-card *ngFor="let item of history" routerLink="{{item.id}}">
         <ion-card-header>
           <div class="flex justify-between">
             <ion-card-subtitle>{{item.sessionTime}}</ion-card-subtitle>
