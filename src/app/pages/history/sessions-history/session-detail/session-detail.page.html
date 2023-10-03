@@ -1,9 +1,40 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" *ngIf="session">
   <ion-header>
     <ion-toolbar>
-      <ion-title size="large">
-        <span *ngIf="session">{{session.workoutName}}</span>
-      </ion-title>
+      <section class="flex justify-between items-center px-5">
+        <ion-title class="p-0">{{session.workoutName}}</ion-title>
+        <h2>{{session.date}}</h2>
+      </section>
     </ion-toolbar>
   </ion-header>
+
+  <section>
+    <ion-card *ngFor="let exercise of session.exercises">
+      <ion-card-header>
+        <ion-card-title>{{ exercise.name }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="flex flex-col justify-center items-start gap-2">
+          <div class="w-full flex justify-between items-center px-2">
+            <p>sets</p>
+            <p>reps</p>
+            <p></p>
+            <p>weight</p>
+            <p *ngIf="!exercise.enterRpe">RIR</p>
+            <p *ngIf="exercise.enterRpe">RPE</p>
+          </div>
+          <div *ngFor="let set of exercise.sets, let i = index" class="w-full">
+            <div *ngIf="set.done" class="w-full flex justify-between items-center px-2">
+              <span>{{ i }}</span>
+              <span>{{ set.reps }}</span>
+              <span>x</span>
+              <span>{{ set.weight }}kg</span>
+              <span *ngIf="set.rir">{{ set.rir }}</span>
+              <span *ngIf="set.rpe">{{ set.rpe }}</span>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </section>
 </ion-content>

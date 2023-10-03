@@ -59,6 +59,7 @@ export class SessionModalComponent  implements OnInit {
     for (let item of this.workout.exercises!) {
       const exercise = new FormGroup({
         name: new FormControl(item.name),
+        enterRpe: new FormControl(item.enterRpe),
         sets: new FormArray([])
       });
       

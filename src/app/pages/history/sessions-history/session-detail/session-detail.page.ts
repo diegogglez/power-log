@@ -29,5 +29,6 @@ export class SessionDetailPage implements OnInit {
 
   async getSession(id: string) {
     this.session = await this.storageService.getSessionById(id);
+    console.log(this.session);    
   }
 }
