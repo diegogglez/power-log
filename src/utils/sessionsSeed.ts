@@ -1,8 +1,9 @@
 import { Session } from "src/app/models/workouts";
+import { v4 as uuidv4 } from 'uuid';
 
 export const sessionsSeed: Session[] = [
   {
-    id: '1',
+    id: uuidv4(),
     date: '02/10/2023',
     workoutName: 'Torso 1',
     sessionTime: '01:36:48',
@@ -91,7 +92,7 @@ export const sessionsSeed: Session[] = [
             weight: 25,
             reps: 12,
             rir: 2,
-            done: true
+            done: false
           },
         ]
       },
@@ -128,7 +129,7 @@ export const sessionsSeed: Session[] = [
     ]
   },
   {
-    id: '2',
+    id: uuidv4(),
     date: '05/10/2023',
     workoutName: 'Pierna 1',
     sessionTime: '01:50:32',
@@ -249,7 +250,7 @@ export const sessionsSeed: Session[] = [
     ]
   },
   {
-    id: '3',
+    id: uuidv4(),
     date: '09/10/2023',
     workoutName: 'Torso 1',
     sessionTime: '01:36:48',
@@ -375,7 +376,128 @@ export const sessionsSeed: Session[] = [
     ]
   },
   {
-    id: '4',
+    id: uuidv4(),
+    date: '12/10/2023',
+    workoutName: 'Pierna 1',
+    sessionTime: '01:50:32',
+    exercises: [
+      {
+        name: 'High bar squats',
+        enterRpe: true,
+        sets: [
+          {
+            weight: 90,
+            reps: 5,
+            rir: null,
+            rpe: 7,
+            done: true
+          },
+          {
+            weight: 90,
+            reps: 5,
+            rir: null,
+            rpe: 7.5,
+            done: true
+          },
+          {
+            weight: 90,
+            reps: 5,
+            rir: null,
+            rpe: 8,
+            done: true
+          },
+          {
+            weight: null,
+            reps: 8,
+            rir: null,
+            rpe: 8.5,
+            done: false
+          },
+        ]
+      },
+      {
+        name: 'Leg extensions',
+        enterRpe: false,
+        sets: [
+          {
+            weight: 50,
+            reps: 12,
+            rir: 2,
+            done: true
+          },
+          {
+            weight: 45,
+            reps: 12,
+            rir: 2,
+            done: true
+          },
+          {
+            weight: 40,
+            reps: 12,
+            rir: 2,
+            done: true
+          }
+        ]
+      },
+      {
+        name: 'Bulgarian squats',
+        enterRpe: false,
+        sets: [
+          {
+            weight: 15,
+            reps: 10,
+            rir: 2,
+            done: true
+          },
+          {
+            weight: 15,
+            reps: 10,
+            rir: 2,
+            done: true
+          },
+          {
+            weight: 15,
+            reps: 10,
+            rir: 2,
+            done: true
+          },
+        ]
+      },
+      {
+        name: 'Hip trust',
+        enterRpe: false,
+        sets: [
+          {
+            weight: null,
+            reps: 10,
+            rir: 2,
+            done: true
+          },
+          {
+            weight: null,
+            reps: 10,
+            rir: 2,
+            done: true
+          },
+          {
+            weight: null,
+            reps: 10,
+            rir: 2,
+            done: false
+          },
+          {
+            weight: null,
+            reps: 10,
+            rir: 2,
+            done: false
+          },
+        ]
+      },
+
+    ]
+  },
+  {
+    id: uuidv4(),
     date: '12/10/2023',
     workoutName: 'Pierna 1',
     sessionTime: '01:50:32',
