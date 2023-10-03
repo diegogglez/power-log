@@ -14,23 +14,17 @@
     </ion-toolbar>
   </ion-header>
 
-  <section>
-    <ion-card>
-      <ion-card-content>
-        <div class="w-full flex-col justify-center items-center">
-          <div class="w-full flex justify-center items-center gap-10">
-            <h2 class="w-16 text-center">Time</h2>
-            <h2 class="w-16 text-center">Volume</h2>
-            <h2 class="w-16 text-center">Sets</h2>
-          </div>
-          <div class="w-full flex justify-center items-center gap-10">
-            <p>{{ session.sessionTime }}</p>
-            <p>{{ totalVolume }}</p>
-            <p>{{ totalSets }}</p>
-          </div>
-        </div>
-      </ion-card-content>
-    </ion-card>
+  <section class="w-full flex-col justify-center items-center p-5">
+      <div class="w-full flex justify-between items-center">
+        <h2 class="w-20 text-center font-bold text-[#5d58e0]">Time</h2>
+        <h2 class="w-20 text-center font-bold text-[#5d58e0]">Volume</h2>
+        <h2 class="w-20 text-center font-bold text-[#5d58e0]">Sets</h2>
+      </div>
+      <div class="w-full flex justify-between items-center">
+        <p>{{ session.sessionTime }}</p>
+        <p>{{ totalVolume }}</p>
+        <p>{{ totalSets }}</p>
+      </div>
   </section>
 
   <section>
