@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { Session } from 'src/app/models/workouts';
 
@@ -20,6 +20,7 @@ export class SessionDetailPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private storageService: StorageService) { }
 
   ngOnInit() {
@@ -30,5 +31,9 @@ export class SessionDetailPage implements OnInit {
   async getSession(id: string) {
     this.session = await this.storageService.getSessionById(id);
     console.log(this.session);    
+  }
+
+  goBack() {
+    this.router.navigate(['/home', 'history']);
   }
 }

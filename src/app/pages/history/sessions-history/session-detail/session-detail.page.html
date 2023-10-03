@@ -1,8 +1,14 @@
 <ion-content [fullscreen]="true" *ngIf="session">
   <ion-header>
     <ion-toolbar>
-      <section class="flex justify-between items-center px-5">
-        <ion-title class="p-0">{{session.workoutName}}</ion-title>
+      <section class="flex justify-between items-center pl-0 pr-5">
+        <ion-button fill="transparent" (click)="goBack()">
+          <ion-icon 
+            name="arrow-back" 
+            slot="icon-only"
+            color="tertiary"></ion-icon>
+        </ion-button>
+        <ion-title class="p-0 text-center">{{session.workoutName}}</ion-title>
         <h2>{{session.date}}</h2>
       </section>
     </ion-toolbar>
