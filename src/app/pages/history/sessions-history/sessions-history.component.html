@@ -1,6 +1,5 @@
-<ion-content>
+<ion-content [fullscreen]="true">
   <p *ngIf="!history.length">No Sessions saved yet</p>
-  <ion-list class="h-full">
     <ion-card *ngFor="let item of history" routerLink="{{item.id}}">
         <ion-card-header>
           <div class="flex justify-between">
@@ -17,5 +16,4 @@
           </div>
         </ion-card-content>
       </ion-card>
-  </ion-list>
 </ion-content>

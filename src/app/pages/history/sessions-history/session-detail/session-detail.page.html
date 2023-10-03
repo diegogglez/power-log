@@ -15,6 +15,25 @@
   </ion-header>
 
   <section>
+    <ion-card>
+      <ion-card-content>
+        <div class="w-full flex-col justify-center items-center">
+          <div class="w-full flex justify-center items-center gap-10">
+            <h2 class="w-16 text-center">Time</h2>
+            <h2 class="w-16 text-center">Volume</h2>
+            <h2 class="w-16 text-center">Sets</h2>
+          </div>
+          <div class="w-full flex justify-center items-center gap-10">
+            <p>{{ session.sessionTime }}</p>
+            <p>{{ totalVolume }}</p>
+            <p>{{ totalSets }}</p>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </section>
+
+  <section>
     <ion-card *ngFor="let exercise of session.exercises">
       <ion-card-header>
         <ion-card-title>{{ exercise.name }}</ion-card-title>
@@ -31,7 +50,7 @@
           </div>
           <div *ngFor="let set of exercise.sets, let i = index" class="w-full">
             <div *ngIf="set.done" class="w-full flex justify-between items-center px-2">
-              <span>{{ i }}</span>
+              <span>{{ i + 1 }}</span>
               <span>{{ set.reps }}</span>
               <span>x</span>
               <span>{{ set.weight }}kg</span>

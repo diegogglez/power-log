@@ -17,6 +17,8 @@ export class SessionDetailPage implements OnInit {
 
   public session!: Session;
   public id: string = '';
+  public totalSets!: number;
+  public totalVolume!: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,10 +32,33 @@ export class SessionDetailPage implements OnInit {
 
   async getSession(id: string) {
     this.session = await this.storageService.getSessionById(id);
-    console.log(this.session);    
+    console.log(this.session); 
+    this.calculateSets();  
+    this.calculatevolume(); 
   }
 
   goBack() {
     this.router.navigate(['/home', 'history']);
+  }
+
+  calculateSets() {
+    let totalSets = 0;
+    for (let exercise of this.session.exercises) {
+      const exerciseSetsDone = exercise.sets.filter((item: any) => item.done === true);
+      console.log(exerciseSetsDone);
+      totalSets += exerciseSetsDone.length;
+    }
+    this.totalSets = totalSets;
+  }
+
+  calculatevolume() {
+    let totalVolume = 0;
+    for (let exercise of this.session.exercises) {
+      const exerciseSetsDone = exercise.sets.filter((item: any) => item.done === true);
+      for (let set of exerciseSetsDone) {
+        totalVolume += set.weight;
+      }
+    }
+    this.totalVolume = `${totalVolume}kg`;
   }
 }
