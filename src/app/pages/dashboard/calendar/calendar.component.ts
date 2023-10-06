@@ -37,34 +37,31 @@ export class CalendarComponent  implements OnInit {
     'December'
   ];
 
+  // Calendar params
   public date: Date = new Date();
+  public year: number = this.date.getFullYear();
   public today!: number;
+  public currentMonth!: number;
   public firstDayMonth!: number;
   public totalDaysMonth!: number[];
 
   constructor() { }
 
   ngOnInit() {
-    this.getCurrentDay();
-    this.getFirstDayMonth(this.date.getFullYear(), this.date.getMonth());
-    this.getTotalMonthDays();
+    this.getCalendarParams();
   }
 
-  getCurrentDay() {
+  getCalendarParams() {
     this.today = this.date.getDate();
-    console.log(this.today)
-  }
-
-  getFirstDayMonth(year: number, month: number) {
-    const monthStart = new Date(year, month, 1);
-    this.firstDayMonth = monthStart.getDay();
-  }
-
-  getTotalMonthDays() {
-    // the month number is 0-based. We need to sum 1 to the current month value to get que actual month
-    const date = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0);
-    const monthDays = date.getDate();
+    this.currentMonth = this.date.getMonth();
+    console.log(this.currentMonth)
+    
+    const firstDay = new Date(this.date.getFullYear(), this.currentMonth, 1);
+    const lastDay = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0);
+    const monthDays = lastDay.getDate();
     const daysArr = new Array(monthDays).fill(0).map((n, index) => index + 1);
+    
+    this.firstDayMonth = firstDay.getDay();
     this.totalDaysMonth = daysArr;
   }
 }

@@ -1,5 +1,5 @@
 <div class="calendar-container">
-  <h1>{{ date.getFullYear() }} {{ months[date.getMonth() - 1] }}</h1>
+  <h1>{{ year }} {{ months[currentMonth - 1] }}</h1>
   <div class="calendar">
     <ol>
       <li class="day-name">Mo</li>
@@ -12,7 +12,10 @@
       <li class="{{ week[firstDayMonth] }}" [ngClass]="{'today': today === 1}">1</li>
       <li 
         *ngFor="let day of totalDaysMonth"
-        [ngClass]="{'today': day === totalDaysMonth.length ? day === today : day + 1 === today}">
+        [ngClass]="{
+          'today': day === totalDaysMonth.length ? day === today : day + 1 === today,
+          'trained': false
+        }">
         {{ day === totalDaysMonth.length ? day : day + 1 }}
       </li>
     </ol>
