@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { Session } from 'src/app/models/workouts';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-calendar',
@@ -43,25 +45,45 @@ export class CalendarComponent  implements OnInit {
   public today!: number;
   public currentMonth!: number;
   public firstDayMonth!: number;
-  public totalDaysMonth!: number[];
+  public totalDaysMonth!: any[];
 
-  constructor() { }
+  constructor(private storageService: StorageService) { }
 
   ngOnInit() {
     this.getCalendarParams();
+    this.getSessions();
   }
 
   getCalendarParams() {
     this.today = this.date.getDate();
     this.currentMonth = this.date.getMonth();
-    console.log(this.currentMonth)
     
     const firstDay = new Date(this.date.getFullYear(), this.currentMonth, 1);
     const lastDay = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0);
     const monthDays = lastDay.getDate();
-    const daysArr = new Array(monthDays).fill(0).map((n, index) => index + 1);
+    const daysArr = new Array(monthDays).fill(0).map((n, index) => {
+      const dayObj = {
+        number: index + 1,
+        fullDate: index < 10 
+                    ? `0${index + 1}/${this.currentMonth + 1}/${this.year}` 
+                    : `${index + 1}/${this.currentMonth + 1}/${this.year}`,
+        trained: false
+      };
+      return dayObj;
+    });    
     
     this.firstDayMonth = firstDay.getDay();
     this.totalDaysMonth = daysArr;
+    console.log(this.totalDaysMonth)
+  }
+
+  async getSessions() {
+    const sessions: Session[] = await this.storageService.getSessions();
+    const sessionsDates: string[] = sessions.map((session: Session) => session.date)
+    console.log(sessionsDates);
+    
+    this.totalDaysMonth.forEach((day) => {
+      day.trained = sessionsDates.some(date => day.fullDate === date);
+    })
   }
 }
