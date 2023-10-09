@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 export const sessionsSeed: Session[] = [
   {
     id: uuidv4(),
-    date: '02/10/2023',
+    date: '2/10/2023',
     workoutName: 'Torso 1',
     sessionTime: '01:36:48',
     exercises: [
@@ -130,7 +130,7 @@ export const sessionsSeed: Session[] = [
   },
   {
     id: uuidv4(),
-    date: '05/10/2023',
+    date: '5/10/2023',
     workoutName: 'Pierna 1',
     sessionTime: '01:50:32',
     exercises: [
@@ -249,9 +249,9 @@ export const sessionsSeed: Session[] = [
 
     ]
   },
-  {
+  /* {
     id: uuidv4(),
-    date: '09/10/2023',
+    date: '9/10/2023',
     workoutName: 'Torso 1',
     sessionTime: '01:36:48',
     exercises: [
@@ -374,7 +374,7 @@ export const sessionsSeed: Session[] = [
         ]
       },
     ]
-  },
+  }, */
   {
     id: uuidv4(),
     date: '12/10/2023',
