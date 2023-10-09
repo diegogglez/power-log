@@ -10,22 +10,16 @@
       <li class="day-name">Sa</li>
       <li class="day-name">Su</li>
       <li 
-        class="{{ week[firstDayMonth] }}" 
-        [ngClass]="{
-          'today': today === 1, 
-          'trained': totalDaysMonth[0].trained
-        }">
-        1
+        class="{{ week[firstDayMonth] }}"
+        [class.today]="today === 1"
+        [class.trained]="totalDaysMonth[0].trained">
+        {{ totalDaysMonth[0].number }}
       </li>
       <li 
-        *ngFor="let day of totalDaysMonth"
-        [ngClass]="{
-          'today': day.number === totalDaysMonth.length 
-                    ? day.number === today 
-                    : day.number + 1 === today,
-          'trained': day.trained
-        }">
-        {{ day.number === totalDaysMonth.length ? day.number : day.number + 1 }}
+        *ngFor="let day of totalDaysMonth[1]"
+        [class.today]="today === day.number"
+        [class.trained]="day.trained">
+        {{ day.number }}
       </li>
     </ol>
   </div>

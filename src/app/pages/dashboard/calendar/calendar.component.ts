@@ -73,16 +73,24 @@ export class CalendarComponent  implements OnInit {
     });    
     
     this.firstDayMonth = firstDay.getDay();
-    this.totalDaysMonth = daysArr;
-    console.log(this.totalDaysMonth)
+    this.totalDaysMonth = this.formatDaysArr(daysArr);
+  }
+
+  formatDaysArr(days: any) {
+    const array1 = new Array(days[0]);
+    const array2 = days;
+
+    array2.shift();
+    array1.push(array2);
+
+    return array1;  
   }
 
   async getSessions() {
     const sessions: Session[] = await this.storageService.getSessions();
-    const sessionsDates: string[] = sessions.map((session: Session) => session.date)
-    console.log(sessionsDates);
+    const sessionsDates: string[] = sessions.map((session: Session) => session.date);
     
-    this.totalDaysMonth.forEach((day) => {
+    this.totalDaysMonth[1].forEach((day: any) => {
       day.trained = sessionsDates.some(date => day.fullDate === date);
     })
   }
