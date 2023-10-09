@@ -1,0 +1,66 @@
+.calendar-container {
+  padding: 20px 0px 20px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  .calendar {
+    text-align: center;
+    width: 350px;
+  }
+
+  ol {
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    li {
+      width: 40px;
+    }
+
+    .today {
+      color:#5d58e0;
+      font-weight: bolder;
+    }
+
+    .trained {
+      background-color: #2dd36f;
+    }
+
+    .day-name {
+      font-weight: bold;
+    }
+    
+    .monday {
+      grid-column-start: 1;
+    }
+    
+    .tuesday {
+      grid-column-start: 2;
+    }
+    
+    .wendesday {
+      grid-column-start: 3;
+    }
+    
+    .thursday {
+      grid-column-start: 4;
+    }
+    
+    .friday {
+      grid-column-start: 5;
+    }
+    
+    .saturday {
+      grid-column-start: 6;
+    }
+    
+    .sunday {
+      grid-column-start: 7;
+    }
+  }
+
+}
