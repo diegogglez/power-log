@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 import { Session } from 'src/app/models/workouts';
 import { StorageService } from 'src/app/services/storage/storage.service';
 
@@ -46,12 +47,18 @@ export class CalendarComponent  implements OnInit {
   public currentMonth!: number;
   public firstDayMonth!: number;
   public totalDaysMonth!: any[];
+  public totalDaysTrained!: number;
+
+  public refreshSuscription!: Subscription;
 
   constructor(private storageService: StorageService) { }
 
   ngOnInit() {
     this.getCalendarParams();
     this.getSessions();
+    this.refreshSuscription = this.storageService.refresh.subscribe(() => {
+      this.getSessions();
+    })
   }
 
   getCalendarParams() {
@@ -64,9 +71,7 @@ export class CalendarComponent  implements OnInit {
     const daysArr = new Array(monthDays).fill(0).map((n, index) => {
       const dayObj = {
         number: index + 1,
-        fullDate: index < 10 
-                    ? `0${index + 1}/${this.currentMonth + 1}/${this.year}` 
-                    : `${index + 1}/${this.currentMonth + 1}/${this.year}`,
+        fullDate: `${index + 1}/${this.currentMonth + 1}/${this.year}`,
         trained: false
       };
       return dayObj;
@@ -90,8 +95,22 @@ export class CalendarComponent  implements OnInit {
     const sessions: Session[] = await this.storageService.getSessions();
     const sessionsDates: string[] = sessions.map((session: Session) => session.date);
     
-    this.totalDaysMonth[1].forEach((day: any) => {
+    await this.totalDaysMonth[1].forEach((day: any) => {
       day.trained = sessionsDates.some(date => day.fullDate === date);
     })
+    this.getTrainedDaysNumber()
+  }
+
+  getTrainedDaysNumber() {
+    let count = 0;
+    if (this.totalDaysMonth[0].trained) {
+      count++;
+    }
+    for (let day of this.totalDaysMonth[1]) {
+      if (day.trained) {
+        count++;
+      }
+    }
+    this.totalDaysTrained = count;
   }
 }
