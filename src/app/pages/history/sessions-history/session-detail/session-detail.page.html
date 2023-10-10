@@ -9,7 +9,7 @@
             color="tertiary"></ion-icon>
         </ion-button>
         <ion-title class="p-0 text-center">{{session.workoutName}}</ion-title>
-        <h2>{{session.date}}</h2>
+        <h2 class="text-white/50">{{session.date}}</h2>
       </section>
     </ion-toolbar>
   </ion-header>
@@ -47,9 +47,9 @@
               <span>{{ i + 1 }}</span>
               <span>{{ set.reps }}</span>
               <span>x</span>
-              <span>{{ set.weight }}kg</span>
-              <span *ngIf="set.rir">{{ set.rir }}</span>
-              <span *ngIf="set.rpe">{{ set.rpe }}</span>
+              <span>{{ set.weight ? set.weight : 0 }}kg</span>
+              <span *ngIf="!exercise.enterRpe">{{ set.rir ? set.rir : null }}</span>
+              <span *ngIf="exercise.enterRpe">{{ set.rpe ? set.rpe : null }}</span>
             </div>
           </div>
         </div>
