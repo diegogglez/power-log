@@ -56,7 +56,7 @@ export class SessionDetailPage implements OnInit {
     for (let exercise of this.session.exercises) {
       const exerciseSetsDone = exercise.sets.filter((item: any) => item.done === true);
       for (let set of exerciseSetsDone) {
-        totalVolume += set.weight;
+        totalVolume += set.weight * set.reps;
       }
     }
     this.totalVolume = `${totalVolume}kg`;
