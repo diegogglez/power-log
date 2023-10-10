@@ -1,6 +1,6 @@
 <div class="calendar-container">
-  <h1>{{ year }} {{ months[currentMonth - 1] }}</h1>
   <div class="calendar">
+    <h1>{{ year }} {{ months[currentMonth - 1] }}</h1>
     <ol>
       <li class="day-name">Mo</li>
       <li class="day-name">Tu</li>
@@ -22,6 +22,6 @@
         {{ day.number }}
       </li>
     </ol>
+    <h2>Days trained this month: {{ totalDaysTrained }}</h2>
   </div>
-  <h2>Days trained this month: {{ totalDaysTrained }}</h2>
 </div>
