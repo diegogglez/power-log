@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { Session, Workout } from 'src/app/models/workouts';
-import { TimerComponent } from './timer/timer.component';
+import { SessionTimerComponent } from './session-timer/session-timer.component';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import { Subscription } from 'rxjs';
@@ -17,7 +17,7 @@ import { StorageService } from 'src/app/services/storage/storage.service';
   imports: [
     IonicModule,
     CommonModule,
-    TimerComponent,
+    SessionTimerComponent,
     ReactiveFormsModule
   ],
 })

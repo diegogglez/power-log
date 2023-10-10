@@ -5,15 +5,15 @@ import { WorkoutService } from 'src/app/services/workout/workout.service';
 
 @Component({
   selector: 'app-timer',
-  templateUrl: './timer.component.html',
-  styleUrls: ['./timer.component.scss'],
+  templateUrl: './session-timer.component.html',
+  styleUrls: ['./session-timer.component.scss'],
   standalone: true,
   imports: [
     IonicModule,
     CommonModule
   ],
 })
-export class TimerComponent  implements OnInit, OnDestroy {
+export class SessionTimerComponent  implements OnInit, OnDestroy {
 
   private timer: any;
   public hr: string = '00';
